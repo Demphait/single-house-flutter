@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/app/router/index.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/utils/translate.dart';
 
@@ -17,9 +18,9 @@ class _AppState extends State<App> {
       theme: ThemeData(
         primaryColor: AppColors.primary,
       ),
-      builder: (context, child) {
-        return Container();
-      },
+      navigatorKey: RouterCore.navigatorKey,
+      onGenerateRoute: RouterList.onGenerateRoute,
+      initialRoute: RouterList.defaultRoute,
     );
   }
 }
