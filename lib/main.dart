@@ -11,6 +11,9 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       await ECore.init();
+      // await SocketIO.init(
+      //   domain: 'signal-house.herokuapp.com',
+      // );
 
       runApp(const App());
     },
