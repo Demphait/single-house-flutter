@@ -114,7 +114,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                       child: child,
                     );
                   },
-                  child: Image.asset('assets/icons/gear.png'),
+                  child: Image.asset('assets/images/gear.png'),
                 ),
                 Positioned.fill(
                   child: IconButton(
