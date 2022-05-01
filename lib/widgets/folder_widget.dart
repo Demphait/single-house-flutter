@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/models/folder_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 
 class FolderWidget extends StatefulWidget {
   const FolderWidget({
     Key? key,
-    required this.name,
+    required this.folder,
     this.isLast = false,
   }) : super(key: key);
 
-  final String name;
+  final FolderModel folder;
   final bool isLast;
 
   @override
@@ -33,7 +34,7 @@ class _FolderWidgetState extends State<FolderWidget> {
       padding: EdgeInsets.only(right: widget.isLast ? 0 : AppSpace.sm),
       child: ElevatedButton(
         onPressed: _changeColor,
-        child: Text(widget.name, style: TextStyle(color: _isActiveButton ? AppColors.white : AppColors.black)),
+        child: Text(widget.folder.name, style: TextStyle(color: _isActiveButton ? AppColors.white : AppColors.black)),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(

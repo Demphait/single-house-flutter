@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/models/chat_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
@@ -6,7 +7,10 @@ import 'package:single_house/styles/app_text_styles.dart';
 class DialogWidget extends StatelessWidget {
   const DialogWidget({
     Key? key,
+    required this.chat
   }) : super(key: key);
+
+    final ChatModel chat;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class DialogWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppSpace.smd),
-              child: const Image(image: AssetImage('assets/images/avatar.png'), height: 50, width: 50),
+              child: Image(image: AssetImage(chat.img), height: 50, width: 50),
             ),
             AppSpaceBox.smd,
             Expanded(
@@ -31,8 +35,8 @@ class DialogWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Expanded(child: Text('Ricardo Milos', style: AppTextStyles.styleTextField.white)),
-                        Text('11:47', style: AppTextStyles.styleTextTime.search),
+                        Expanded(child: Text(chat.name, style: AppTextStyles.styleTextField.white)),
+                        Text(chat.time, style: AppTextStyles.styleTextTime.search),
                       ],
                     ),
                     SizedBox(height: AppSpace.xsm),
@@ -40,13 +44,13 @@ class DialogWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'Do you wanna play with me?',
+                            chat.dialog,
                             style: AppTextStyles.styleTextField.search,
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 0.5, horizontal: 4),
-                          child: const Text('1'),
+                          child: Text(chat.counterMessage),
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             color: AppColors.primary,
