@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/cubit/chat_cubit.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
+import 'package:single_house/views/chats/cubit/chat_cubit.dart';
+import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/folder_widget.dart';
 import 'package:single_house/widgets/dialog_item.dart';
 import 'package:single_house/widgets/search_widget.dart';
@@ -31,6 +32,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   final FocusNode _focusNode = FocusNode();
   late AnimationController _animationMenu;
   late AnimationController _animationBackgroundIcon;
+  final ScrollController _startController = ScrollController(initialScrollOffset: 99 - 48);
 
   void toggleIcon() => setState(() {
         isPlaying = !isPlaying;
@@ -66,68 +68,84 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => _cubit..loadingChats()..loadingFolders(),
+      create: (context) => _cubit
+        ..loadingChats()
+        ..loadingFolders(),
       child: Scaffold(
-          backgroundColor: AppColors.background,
-          body: Stack(
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Stack(
             children: [
-              SafeArea(
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.def),
-                      child: SearchWidget(focusNode: _focusNode, controller: _controller),
-                    ),
-                    BlocBuilder<ChatCubit, ChatState>(
+              CustomScrollView(
+                controller: _startController,
+                slivers: [
+                  SliverAppBar(
+                    //expandedHeight: 115,
+                    title: SearchWidget(focusNode: _focusNode, controller: _controller),
+                    backgroundColor: AppColors.background,
+                    automaticallyImplyLeading: false,
+                    floating: false,
+                    pinned: false,
+                    snap: false,
+                  ),
+                  SliverAppBar(
+                    elevation: 0,
+                    leadingWidth: 0,
+                    backgroundColor: AppColors.background,
+                    automaticallyImplyLeading: false,
+                    floating: false,
+                    pinned: true,
+                    snap: false,
+                    flexibleSpace: BlocBuilder<ChatCubit, ChatState>(
                       builder: (context, state) {
-                        switch (state.statesFolders) {
-                          case StatesFolders.loadedFolders:
-                            return SizedBox(
-                              height: 35,
-                              child: ListView.builder(
-                                padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: state.folders.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return FolderWidget(
-                                      folder: state.folders[index], isLast: index == state.folders.length - 1);
-                                  //return FolderWidget(name: 'folder ', isLast: index == 10 - 1 ? true:false);
-                                },
-                              ),
-                            );
-                          case StatesFolders.emptyFolders:
-                            return const Text('Folders not found');
-                          case StatesFolders.loadingFolders:
-                            return const CircularProgressIndicator();
+                        if (state.folders == null) {
+                          return AppLoader();
                         }
+                        if (state.folders!.isEmpty) {
+                          return const Text('Folders not found');
+                        }
+                        return SizedBox(
+                          height: 35 + 16,
+                          child: ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.sm),
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.folders!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return FolderWidget(
+                                  folder: state.folders![index], isLast: index == state.folders!.length - 1);
+                            },
+                          ),
+                        );
                       },
                     ),
-                    Padding(
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
-                      child: BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
-                        switch (state.states) {
-                          case States.loadedChats:
-                            return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: state.chats.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return DialogWidget(
-                                  chat: state.chats[index],
-                                );
-                              },
-                            );
-                          case States.emptyChats:
+                      child: BlocBuilder<ChatCubit, ChatState>(
+                        builder: (context, state) {
+                          if (state.chats == null) {
+                            return AppLoader();
+                          }
+                          if (state.chats!.isEmpty) {
                             return const Text('Chats not found');
-                          case States.loadingChats:
-                            return const CircularProgressIndicator();
-                        }
-                      }),
+                          }
+                          return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: state.chats!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return DialogWidget(
+                                chat: state.chats![index],
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Positioned(
                 bottom: 43,
@@ -164,7 +182,9 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                 ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
