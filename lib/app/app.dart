@@ -17,6 +17,7 @@ class _AppState extends State<App> {
       title: 'Flutter Demo'.t,
       theme: ThemeData(
         primaryColor: AppColors.primary,
+        brightness: Brightness.dark,
       ),
       navigatorKey: RouterCore.navigatorKey,
       onGenerateRoute: RouterList.onGenerateRoute,
