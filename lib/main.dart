@@ -11,6 +11,12 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       await ECore.init();
+
+      try {
+        throw ('error');
+      } catch (e, stackTrace) {
+        ECore.report(exception: e, stackTrace: stackTrace);
+      }
       // await SocketIO.init(
       //   domain: 'signal-house.herokuapp.com',
       // );
