@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "476715635515",
+    "project_id": "signal-house-3a14a",
+    "storage_bucket": "signal-house-3a14a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476715635515:android:1ffea51751640ab7b89d1e",
+        "android_client_info": {
+          "package_name": "com.invalid_studio.single_house"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476715635515-pi0o91cbl878jj47dvh5utii8alu0f2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy2iB62vWT3zIfBHRDJGVuBek6pNgZizA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476715635515-pi0o91cbl878jj47dvh5utii8alu0f2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
