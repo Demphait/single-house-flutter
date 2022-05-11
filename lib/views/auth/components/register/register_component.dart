@@ -4,6 +4,7 @@ import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
+import 'package:single_house/utils/validation/validate_invite.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -23,8 +24,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   final formKey = GlobalKey<FormState>();
   String email = '';
   String cofirmPassword = '';
+  String invite = '';
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cofirmPasswordController = TextEditingController();
+  final TextEditingController _inviteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +97,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   validator: ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
                 ),
                 AppSpaceBox.md,
-                const AppTextField(
+                AppTextField(
                   name: 'Invite',
                   obscureText: false,
                   textInputAction: TextInputAction.done,
-                  textInputType: TextInputType.number,
+                  controller: _inviteController,
+                  validator: ValidateInvite(isRequired: true).validation,
                 ),
               ],
             ),
