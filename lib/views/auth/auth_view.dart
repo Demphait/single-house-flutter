@@ -46,7 +46,7 @@ class _AuthViewState extends State<AuthView> {
                   children: <Widget>[
                     LoginWidget(
                         formKey: formKey, loginController: _loginController, passController: _passwordController),
-                    RegisterWidget(),
+                    RegisterWidget(formKey: formKey, passController: _passwordController),
                   ],
                 ),
                 Padding(

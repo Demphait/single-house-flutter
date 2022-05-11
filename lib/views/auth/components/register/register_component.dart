@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
+import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 
 class RegisterWidget extends StatefulWidget {
   const RegisterWidget({
     Key? key,
+    required this.formKey,
+    required this.passController,
   }) : super(key: key);
+  final TextEditingController passController;
+  final GlobalKey<FormState> formKey;
 
   @override
   State<RegisterWidget> createState() => _RegisterWidgetState();
@@ -17,7 +22,10 @@ class RegisterWidget extends StatefulWidget {
 class _RegisterWidgetState extends State<RegisterWidget> {
   final formKey = GlobalKey<FormState>();
   String email = '';
+  String cofirmPassword = '';
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cofirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,6 +43,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ElevatedButton(
               onPressed: () {
                 formKey.currentState?.validate();
+                widget.formKey.currentState?.validate();
               },
               child: const Text('Register'),
               style: ButtonStyle(
@@ -78,9 +87,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   child: AppTextField(name: '1'),
                 ),
                 AppSpaceBox.md,
-                const AppTextField(
+                AppTextField(
                   name: 'Confirm Password',
                   obscureText: true,
+                  controller: _cofirmPasswordController,
+                  validator: ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
                 ),
                 AppSpaceBox.md,
                 const AppTextField(
