@@ -5,25 +5,23 @@ class ValidatePassword extends Validate {
 
   @override
   String? validation(String? value) {
-    RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9]).{6,}$');
+    RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])$');
 
-    if (value == null || (value.isEmpty) && isRequired) {
-      if (isRequired == true) {
-        print('Required field');
-        return 'Required field';
-      }
-      print('null isRequired');
+    if ((value == null || value.isEmpty) && isRequired) {
+      return 'Required field';
+    }
+
+    if (value == null) {
       return null;
     }
 
-    // if (value.length < 6) {
-    //   print('Enter min 6 characters');
-    //   return 'Enter min 6 characters';
-    // }
-    if (!regExp.hasMatch(value)) {
-      return 'Enter min 6 characters, including 1 letter and 1 number';
+    if (value.length < 6) {
+      return 'Enter min 6 characters';
     }
-    print('null pass');
+
+    if (!regExp.hasMatch(value)) {
+      return 'Enter password including 1 letter and 1 number';
+    }
     return null;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:single_house/styles/app_colors.dart';
+import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
@@ -23,11 +23,6 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   final LoginCubit _cubit = LoginCubit();
-
-  bool isPressed = false;
-  // void _login() {
-  //   RouterCore.push(ChatsView.name);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +56,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   _cubit.loading();
                 },
                 child: const Text('Login'),
-                style: ButtonStyle(
-                  textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.styleTextField.white),
-                  minimumSize: MaterialStateProperty.all<Size>(const Size(360, 45)),
-                  backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
+                style: AppButtonStyles.primaryButton,
               ),
             ],
           ),

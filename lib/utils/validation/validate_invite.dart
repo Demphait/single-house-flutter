@@ -5,17 +5,9 @@ class ValidateInvite extends Validate {
 
   @override
   String? validation(String? value) {
-
-    if (value == null || (value.isEmpty) && isRequired) {
-      if (isRequired == true) {
-        print('Required field');
-        return 'Required field';
-      }
-      print('null isRequired');
-      return null;
+    if ((value == null || value.isEmpty) && isRequired) {
+      return 'Required field';
     }
-
-    print('null pass');
     return null;
   }
 }

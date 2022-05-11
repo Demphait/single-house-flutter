@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/styles/app_colors.dart';
+import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
@@ -49,16 +49,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 widget.formKey.currentState?.validate();
               },
               child: const Text('Register'),
-              style: ButtonStyle(
-                textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.styleTextField.white),
-                minimumSize: MaterialStateProperty.all<Size>(const Size(360, 45)),
-                backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
+              style: AppButtonStyles.primaryButton,
             ),
           ],
         ),
