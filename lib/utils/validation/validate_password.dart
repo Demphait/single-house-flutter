@@ -5,7 +5,7 @@ class ValidatePassword extends Validate {
 
   @override
   String? validation(String? value) {
-    RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])$');
+    RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])');
 
     if ((value == null || value.isEmpty) && isRequired) {
       return 'Required field';
