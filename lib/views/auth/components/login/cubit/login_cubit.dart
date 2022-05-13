@@ -13,7 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
       return emit(LoginState.init);
   }
 
-  void submit(TextEditingController loginController, TextEditingController passwordController) {
+  void submit(String loginController, String passwordController) {
 
   }
 }

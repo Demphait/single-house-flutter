@@ -65,8 +65,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   formKey.currentState?.validate();
                   widget.formKey.currentState?.validate();
                   if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
-                    _registerCubit.submit(_emailController, _cofirmPasswordController, _inviteController);
-                    _loginCubit.submit(widget.loginController, widget.passController);
+                    _registerCubit.submit(_emailController.text, _cofirmPasswordController.text, _inviteController.text);
+                    _loginCubit.submit(widget.loginController.text, widget.passController.text);
                     _registerCubit.loading();
                   }
                 },

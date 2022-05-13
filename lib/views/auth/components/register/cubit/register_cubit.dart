@@ -13,8 +13,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void submit(
-    TextEditingController emailController,
-    TextEditingController cofirmPasswordController,
-    TextEditingController inviteController,
+    String emailController,
+    String cofirmPasswordController,
+    String inviteController,
   ) {}
 }

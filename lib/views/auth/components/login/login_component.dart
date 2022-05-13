@@ -53,7 +53,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onPressed: () {
                   widget.formKey.currentState?.validate();
                   if (widget.formKey.currentState?.validate() == true) {
-                    _cubit.submit(widget.loginController, widget.passController);
+                    _cubit.submit(widget.loginController.text, widget.passController.text);
                     _cubit.loading();
                   }
                 },
