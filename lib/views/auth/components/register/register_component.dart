@@ -30,9 +30,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   final RegisterCubit _registerCubit = RegisterCubit();
   final LoginCubit _loginCubit = LoginCubit();
   final formKey = GlobalKey<FormState>();
-  String email = '';
-  String cofirmPassword = '';
-  String invite = '';
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cofirmPasswordController = TextEditingController();
   final TextEditingController _inviteController = TextEditingController();
@@ -91,9 +88,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     textInputType: TextInputType.emailAddress,
                     controller: _emailController,
                     validator: ValidateEmail(isRequired: true).validation,
-                    onChanged: (value) => setState(() {
-                      email = value;
-                    }),
                   ),
                   AppSpaceBox.md,
                   const Opacity(
