@@ -10,7 +10,7 @@ class ValidateConfirmPass extends Validate {
 
   @override
   String? validation(String? value) {
-    String? preValid = super.validation(value);
+    String? preValid = super.isNull(value);
 
     if (preValid == null || preValid.isNotEmpty) {
       return preValid;
