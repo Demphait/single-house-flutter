@@ -26,8 +26,15 @@ extension AppTextStyles on TextStyle {
     fontFamily: '',
   );
 
+  static TextStyle get styleTextError => const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    fontFamily: '',
+  );
+
   TextStyle get black => copyWith(color: AppColors.black);
   TextStyle get white => copyWith(color: AppColors.white);
   TextStyle get primary => copyWith(color: AppColors.primary);
   TextStyle get search => copyWith(color: AppColors.search);
+  TextStyle get red => copyWith(color: AppColors.red);
 }

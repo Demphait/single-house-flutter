@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
+import 'package:single_house/utils/validation/validate_login.dart';
+import 'package:single_house/utils/validation/validate_password.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'components/login/login_component.dart';
@@ -21,7 +23,13 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
+  final formKey = GlobalKey<FormState>();
+  String login = '';
+  String password = '';
   final PageController _pageController = PageController();
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +43,42 @@ class _AuthViewState extends State<AuthView> {
               children: [
                 PageView(
                   controller: _pageController,
-                  children: const <Widget>[
-                    LoginWidget(),
-                    RegisterWidget(),
+                  children: <Widget>[
+                    LoginWidget(
+                        formKey: formKey, loginController: _loginController, passController: _passwordController),
+                    RegisterWidget(formKey: formKey, passController: _passwordController),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSpace.md),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      AppTextField(name: 'Username'),
-                      AppTextField(name: 'Password', obscureText: true, textInputAction: TextInputAction.done),
-                    ],
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppTextField(
+                          name: 'Username',
+                          controller: _loginController,
+                          validator: ValidateLogin(isRequired: true).validation,
+                          onChanged: (value) => setState(() {
+                            login = value;
+                          }),
+                        ),
+                        AppSpaceBox.md,
+                        AppTextField(
+                          name: 'Password',
+                          obscureText: true,
+                          textInputAction: TextInputAction.done,
+                          controller: _passwordController,
+                          validator: ValidatePassword(isRequired: true).validation,
+                          onChanged: (value) => setState(
+                            () {
+                              password = value;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -63,7 +94,3 @@ class _AuthViewState extends State<AuthView> {
     );
   }
 }
-
-
-
-

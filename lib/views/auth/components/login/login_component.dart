@@ -1,48 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/app/router/index.dart';
-import 'package:single_house/styles/app_colors.dart';
-import 'package:single_house/styles/app_space.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_text_styles.dart';
-import 'package:single_house/utils/translate.dart';
-import 'package:single_house/views/chats/chats_view.dart';
+import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
+import 'package:single_house/widgets/app_loader.dart';
 
 
-
-
-
-void _login() {
-  RouterCore.push(ChatsView.name);
-}
-class LoginWidget extends StatelessWidget {
+class LoginWidget extends StatefulWidget {
   const LoginWidget({
     Key? key,
+    required this.formKey,
+    required this.loginController,
+    required this.passController,
   }) : super(key: key);
+  final GlobalKey<FormState> formKey;
+  final TextEditingController loginController;
+  final TextEditingController passController;
+
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
+  final LoginCubit _cubit = LoginCubit();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSpace.md),
-      child: Column(
+    return BlocProvider(
+      create: (context) => _cubit,
+      child: Stack(
         children: [
-          const SizedBox(height: 93),
-          Text(
-            'Login'.t,
-            style: AppTextStyles.title.white,
+          BlocBuilder<LoginCubit, LoginState>(
+            builder: (context, state) {
+              switch (state) {
+                case LoginState.init:
+                  return const SizedBox(height: 0);
+                case LoginState.loading:
+                  return AppLoader();
+              }
+            },
           ),
-          Expanded(child: Container()),
-          ElevatedButton(
-            onPressed: _login,
-            child: const Text('Login'),
-            style: ButtonStyle(
-              textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.styleTextField.white),
-              minimumSize: MaterialStateProperty.all<Size>(const Size(360, 45)),
-              backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
+          Column(
+            children: [
+              const SizedBox(height: 93),
+              Text(
+                'Login',
+                style: AppTextStyles.title.white,
               ),
-            ),
+              Expanded(
+                child: Container(),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  widget.formKey.currentState?.validate();
+                  _cubit.loading();
+                },
+                child: const Text('Login'),
+                style: AppButtonStyles.primaryButton,
+              ),
+            ],
           ),
         ],
       ),
