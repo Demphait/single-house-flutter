@@ -3,17 +3,16 @@ import 'package:single_house/utils/validation/validate.dart';
 class ValidatePassword extends Validate {
   ValidatePassword({required bool isRequired}) : super(isRequired: isRequired);
 
+  final RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])');
+
   @override
   String? validation(String? value) {
-    RegExp regExp = RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])');
+    String? preValid = super.validation(value);
 
-    if ((value == null || value.isEmpty) && isRequired) {
-      return 'Required field';
+    if (preValid == null || preValid.isNotEmpty) {
+      return preValid;
     }
-
-    if (value == null) {
-      return null;
-    }
+    value = value!;
 
     if (value.length < 6) {
       return 'Enter min 6 characters';
@@ -22,6 +21,7 @@ class ValidatePassword extends Validate {
     if (!regExp.hasMatch(value)) {
       return 'Enter password including 1 letter and 1 number';
     }
+
     return null;
   }
 }

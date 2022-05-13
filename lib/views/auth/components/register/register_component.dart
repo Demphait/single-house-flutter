@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
+import 'package:single_house/utils/validation/validate.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
-import 'package:single_house/utils/validation/validate_invite.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -93,7 +93,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   obscureText: false,
                   textInputAction: TextInputAction.done,
                   controller: _inviteController,
-                  validator: ValidateInvite(isRequired: true).validation,
+                  validator: Validate(isRequired: true).validation,
                 ),
               ],
             ),

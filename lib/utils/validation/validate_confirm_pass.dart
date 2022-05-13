@@ -10,9 +10,12 @@ class ValidateConfirmPass extends Validate {
 
   @override
   String? validation(String? value) {
-    if ((value == null || value.isEmpty) && isRequired) {
-      return 'Required field';
+    String? preValid = super.validation(value);
+
+    if (preValid == null || preValid.isNotEmpty) {
+      return preValid;
     }
+    value = value!;
 
     if (value != passwordController.text) {
       return 'Passwords do not match';
