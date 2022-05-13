@@ -5,12 +5,13 @@ class ValidateLogin extends Validate {
 
   @override
   String? validation(String? value) {
-    if (isRequired && (value == null || value.isEmpty)) {
-      return 'Required field';
+    String? preValid = super.validation(value);
+
+    if (preValid == null || preValid.isNotEmpty) {
+      return preValid;
     }
-    if (value == null) {
-      return null;
-    }
+    value = value!;
+
     if (value.length < 3 || value.length > 20) {
       return 'Enter min 3 characters or 20 characters max';
     }

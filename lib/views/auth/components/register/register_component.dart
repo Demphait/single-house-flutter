@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
+import 'package:single_house/utils/validation/validate.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
-import 'package:single_house/utils/validation/validate_invite.dart';
 import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
 import 'package:single_house/views/auth/components/register/cubit/register_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
@@ -119,7 +119,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     obscureText: false,
                     textInputAction: TextInputAction.done,
                     controller: _inviteController,
-                    validator: ValidateInvite(isRequired: true).validation,
+                    validator: Validate(isRequired: true).validation,
                   ),
                 ],
               ),
