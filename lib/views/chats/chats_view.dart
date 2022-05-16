@@ -121,28 +121,25 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
-                      child: BlocBuilder<ChatCubit, ChatState>(
-                        builder: (context, state) {
-                          if (state.chats == null) {
-                            return AppLoader();
-                          }
-                          if (state.chats!.isEmpty) {
-                            return const Text('Chats not found');
-                          }
-                          return ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: state.chats!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return DialogWidget(
-                                chat: state.chats![index],
-                              );
-                            },
-                          );
-                        },
-                      ),
+                    child: BlocBuilder<ChatCubit, ChatState>(
+                      builder: (context, state) {
+                        if (state.chats == null) {
+                          return AppLoader();
+                        }
+                        if (state.chats!.isEmpty) {
+                          return const Text('Chats not found');
+                        }
+                        return ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: state.chats!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return DialogWidget(
+                              chat: state.chats![index],
+                            );
+                          },
+                        );
+                      },
                     ),
                   ),
                 ],
