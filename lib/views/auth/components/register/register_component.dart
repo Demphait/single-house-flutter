@@ -62,11 +62,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formKey.currentState?.validate();
-                  widget.formKey.currentState?.validate();
                   if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
-                    _registerCubit.submit(_emailController.text, _cofirmPasswordController.text, _inviteController.text);
-                    _loginCubit.submit(widget.loginController.text, widget.passController.text);
+                    _registerCubit.submit(
+                      widget.loginController.text,
+                      widget.passController.text,
+                      _emailController.text,
+                      _cofirmPasswordController.text,
+                      _inviteController.text,
+                    );
                     _registerCubit.loading();
                   }
                 },
