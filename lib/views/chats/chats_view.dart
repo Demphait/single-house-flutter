@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/models/folder_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/folder_widget.dart';
 import 'package:single_house/widgets/dialog_item.dart';
+import 'package:single_house/widgets/layout/folder_wrap_layout.dart';
 import 'package:single_house/widgets/search_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
@@ -89,6 +91,8 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                     snap: false,
                   ),
                   SliverAppBar(
+                    expandedHeight: 100, // 51 height of one row
+                    collapsedHeight: 100,
                     elevation: 0,
                     leadingWidth: 0,
                     backgroundColor: AppColors.background,
@@ -104,19 +108,36 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                         if (state.folders!.isEmpty) {
                           return const Text('Folders not found');
                         }
-                        return SizedBox(
-                          height: 35 + 16,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.sm),
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.folders!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return FolderWidget(
-                                  folder: state.folders![index], isLast: index == state.folders!.length - 1);
-                            },
-                          ),
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
+                          child: FolderWrapLayout(folders: state.folders!),
                         );
+                        // return Wrap(
+                        //   children: List.generate(
+                        //       state.folders!.length,
+                        //       (index) => FolderWidget(
+                        //           folder: state.folders![index], isLast: index == state.folders!.length - 1)),
+                        // List.generate(3, (index) => Text('hello')),
+                        // List.generate(
+                        //   5,
+                        //   (index) => FolderWidget(
+                        //       folder: state.folders![index], isLast: index == state.folders!.length - 1),
+                        // ),
+                        // SizedBox(
+                        //   //width: MediaQuery.of(context).size.width,
+                        //   height: 35 + 16,
+                        //   child: ListView.builder(
+                        //     padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.sm),
+                        //     physics: const BouncingScrollPhysics(),
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemCount: state.folders!.length,
+                        //     itemBuilder: (BuildContext context, int index) {
+                        //       return FolderWidget(
+                        //           folder: state.folders![index], isLast: index == state.folders!.length - 1);
+                        //     },
+                        //   ),
+                        // ),
+                        // );
                       },
                     ),
                   ),
