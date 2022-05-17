@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/models/folder_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
-import 'package:single_house/widgets/folder_widget.dart';
 import 'package:single_house/widgets/dialog_item.dart';
+import 'package:single_house/widgets/layout/folder_linear_layout.dart';
 import 'package:single_house/widgets/layout/folder_wrap_layout.dart';
 import 'package:single_house/widgets/search_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,13 +27,27 @@ class ChatsView extends StatefulWidget {
 }
 
 class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
-  final ChatCubit _cubit = ChatCubit();
-  bool isPlaying = false;
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _controllerChats = ScrollController();
   final FocusNode _focusNode = FocusNode();
-  late AnimationController _animationMenu;
+  final ChatCubit _cubit = ChatCubit();
   late AnimationController _animationBackgroundIcon;
-  final ScrollController _startController = ScrollController(initialScrollOffset: 99 - 48);
+  late AnimationController _animationMenu;
+  bool _isExpandedSearch = false;
+  bool _toggleFolders = true;
+  bool isPlaying = false;
+
+  _scrollListener() {
+    if (_isExpandedSearch && _controllerChats.offset > _controllerChats.position.minScrollExtent) {
+      setState(() {
+        _isExpandedSearch = false;
+      });
+    } else if (!_isExpandedSearch && _controllerChats.offset < _controllerChats.position.minScrollExtent) {
+      setState(() {
+        _isExpandedSearch = true;
+      });
+    }
+  }
 
   void toggleIcon() => setState(() {
         isPlaying = !isPlaying;
@@ -44,13 +57,14 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   @override
   void initState() {
     // rebuild the textfield on focus changes
+    _controllerChats.addListener(_scrollListener);
     _focusNode.addListener(() {
       setState(() {});
     });
     super.initState();
     _animationMenu = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(seconds: 1),
     );
     _animationBackgroundIcon = AnimationController(
       vsync: this,
@@ -78,80 +92,45 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
         body: SafeArea(
           child: Stack(
             children: [
-              CustomScrollView(
-                controller: _startController,
-                slivers: [
-                  SliverAppBar(
-                    //expandedHeight: 115,
-                    title: SearchWidget(focusNode: _focusNode, controller: _controller),
-                    backgroundColor: AppColors.background,
-                    automaticallyImplyLeading: false,
-                    floating: false,
-                    pinned: false,
-                    snap: false,
-                  ),
-                  SliverAppBar(
-                    expandedHeight: 100, // 51 height of one row
-                    collapsedHeight: 100,
-                    elevation: 0,
-                    leadingWidth: 0,
-                    backgroundColor: AppColors.background,
-                    automaticallyImplyLeading: false,
-                    floating: false,
-                    pinned: true,
-                    snap: false,
-                    flexibleSpace: BlocBuilder<ChatCubit, ChatState>(
-                      builder: (context, state) {
-                        if (state.folders == null) {
-                          return AppLoader();
-                        }
-                        if (state.folders!.isEmpty) {
-                          return const Text('Folders not found');
-                        }
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
-                          child: FolderWrapLayout(folders: state.folders!),
-                        );
-                        // return Wrap(
-                        //   children: List.generate(
-                        //       state.folders!.length,
-                        //       (index) => FolderWidget(
-                        //           folder: state.folders![index], isLast: index == state.folders!.length - 1)),
-                        // List.generate(3, (index) => Text('hello')),
-                        // List.generate(
-                        //   5,
-                        //   (index) => FolderWidget(
-                        //       folder: state.folders![index], isLast: index == state.folders!.length - 1),
-                        // ),
-                        // SizedBox(
-                        //   //width: MediaQuery.of(context).size.width,
-                        //   height: 35 + 16,
-                        //   child: ListView.builder(
-                        //     padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.sm),
-                        //     physics: const BouncingScrollPhysics(),
-                        //     scrollDirection: Axis.horizontal,
-                        //     itemCount: state.folders!.length,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       return FolderWidget(
-                        //           folder: state.folders![index], isLast: index == state.folders!.length - 1);
-                        //     },
-                        //   ),
-                        // ),
-                        // );
-                      },
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AnimatedContainer(
+                    padding: EdgeInsets.all(AppSpace.smd),
+                    clipBehavior: Clip.hardEdge,
+                    decoration: const BoxDecoration(),
+                    height: _isExpandedSearch ? 40 + 24 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    child: SearchWidget(
+                      focusNode: _focusNode,
+                      controller: _controller,
                     ),
                   ),
-                  SliverToBoxAdapter(
-                    child: BlocBuilder<ChatCubit, ChatState>(
-                      builder: (context, state) {
-                        if (state.chats == null) {
-                          return AppLoader();
-                        }
-                        if (state.chats!.isEmpty) {
-                          return const Text('Chats not found');
-                        }
-                        return ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
+                  BlocBuilder<ChatCubit, ChatState>(
+                    builder: (context, state) {
+                      if (state.folders == null) {
+                        return AppLoader();
+                      }
+                      if (state.folders!.isEmpty) {
+                        return const Text('Folders not found');
+                      }
+                      return _toggleFolders
+                          ? FolderLinearLayout(folders: state.folders!)
+                          : FolderWrapLayout(folders: state.folders!);
+                    },
+                  ),
+                  BlocBuilder<ChatCubit, ChatState>(
+                    builder: (context, state) {
+                      if (state.chats == null) {
+                        return AppLoader();
+                      }
+                      if (state.chats!.isEmpty) {
+                        return const Text('Chats not found');
+                      }
+                      return Expanded(
+                        child: ListView.builder(
+                          controller: _controllerChats,
+                          physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: state.chats!.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -159,9 +138,9 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                               chat: state.chats![index],
                             );
                           },
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -184,7 +163,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                       child: IconButton(
                         onPressed: () {
                           toggleIcon();
-                          _cubit.loadingFolders();
+                          _toggleFolders = !_toggleFolders;
                         },
                         icon: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
