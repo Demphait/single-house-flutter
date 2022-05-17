@@ -8,7 +8,6 @@ class ChatCubit extends Cubit<ChatState> {
   ChatCubit() : super(ChatState());
 
   Future<void> loadingChats() async {
-    emit(ChatState(folders: state.folders));
     await Future.delayed(const Duration(seconds: 2));
     List<ChatModel> chats = List.generate(
         50,
@@ -23,12 +22,20 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> loadingFolders() async {
-    emit(ChatState(chats: state.chats)); 
     await Future.delayed(const Duration(seconds: 2));
     List<FolderModel> folders = List.generate(
       8,
       (index) => FolderModel(name: 'Folder$index'),
     );
     emit(state.copyWith(folders: folders));
+  }
+
+  Future<void> fetch() async {
+    emit(state.copyWith(status: ChatStatus.loading));
+    await Future.wait([
+      loadingFolders(),
+      loadingChats(),
+    ]);
+    emit(state.copyWith(status: ChatStatus.ready));
   }
 }
