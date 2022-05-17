@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/widgets/app_loader.dart';
 
 class LoadingWrapper extends StatelessWidget {
@@ -14,12 +15,12 @@ class LoadingWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (isLoading) ...[
-          AppLoader(),
-          child,
-        ] else ...[
-          child,
-        ]
+        child,
+        if (isLoading)
+          Container(
+            child: AppLoader(),
+            color: AppColors.black.withOpacity(0.1),
+          ),
       ],
     );
   }
