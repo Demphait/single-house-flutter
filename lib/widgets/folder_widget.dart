@@ -34,7 +34,12 @@ class _FolderWidgetState extends State<FolderWidget> {
       padding: EdgeInsets.only(right: widget.isLast ? 0 : AppSpace.sm),
       child: ElevatedButton(
         onPressed: _changeColor,
-        child: Text(widget.folder.name, style: TextStyle(color: _isActiveButton ? AppColors.white : AppColors.black)),
+        child: Text(
+          widget.folder.name,
+          style: TextStyle(
+            color: _isActiveButton ? AppColors.white : AppColors.black,
+          ),
+        ),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
