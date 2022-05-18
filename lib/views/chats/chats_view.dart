@@ -35,7 +35,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   late AnimationController _animationMenu;
   bool _isExpandedSearch = false;
   bool _toggleFolders = true;
-  bool isPlaying = false;
+  bool _isPlaying = false;
 
   _scrollListener() {
     if (_isExpandedSearch && _controllerChats.offset > _controllerChats.position.minScrollExtent) {
@@ -50,8 +50,8 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   }
 
   void toggleIcon() => setState(() {
-        isPlaying = !isPlaying;
-        isPlaying ? _animationMenu.forward() : _animationMenu.reverse();
+        _isPlaying = !_isPlaying;
+        _isPlaying ? _animationMenu.forward() : _animationMenu.reverse();
       });
 
   @override
@@ -61,7 +61,6 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
     _focusNode.addListener(() {
       setState(() {});
     });
-    super.initState();
     _animationMenu = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -70,14 +69,15 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
       vsync: this,
       duration: const Duration(seconds: 10),
     )..repeat();
+    super.initState();
   }
 
   @override
   void dispose() {
+    _animationBackgroundIcon.dispose();
+    _animationMenu.dispose();
     _controller.dispose();
     _focusNode.dispose();
-    _animationMenu.dispose();
-    _animationBackgroundIcon.dispose();
     super.dispose();
   }
 
@@ -91,64 +91,64 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
           child: BlocBuilder<ChatCubit, ChatState>(
             builder: (context, state) {
               return LoadingWrapper(
-                      isLoading: state.status == ChatStatus.loading,
+                isLoading: state.status == ChatStatus.loading,
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        AnimatedContainer(
+                          padding: EdgeInsets.all(AppSpace.smd),
+                          clipBehavior: Clip.hardEdge,
+                          decoration: const BoxDecoration(),
+                          height: _isExpandedSearch ? 40 + 24 : 0,
+                          duration: const Duration(milliseconds: 300),
+                          child: SearchWidget(
+                            focusNode: _focusNode,
+                            controller: _controller,
+                          ),
+                        ),
+                        _buildFolders(state),
+                        _buildChats(state),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 43,
+                      left: -45,
                       child: Stack(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              AnimatedContainer(
-                                padding: EdgeInsets.all(AppSpace.smd),
-                                clipBehavior: Clip.hardEdge,
-                                decoration: const BoxDecoration(),
-                                height: _isExpandedSearch ? 40 + 24 : 0,
-                                duration: const Duration(milliseconds: 300),
-                                child: SearchWidget(
-                                  focusNode: _focusNode,
-                                  controller: _controller,
+                          AnimatedBuilder(
+                            animation: _animationBackgroundIcon,
+                            builder: (_, child) {
+                              return Transform.rotate(
+                                angle: _animationBackgroundIcon.value * 2 * math.pi,
+                                child: child,
+                              );
+                            },
+                            child: Image.asset('assets/images/gear.png'),
+                          ),
+                          Positioned.fill(
+                            child: IconButton(
+                              onPressed: () {
+                                toggleIcon();
+                                _toggleFolders = !_toggleFolders;
+                              },
+                              icon: Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: AnimatedIcon(
+                                  icon: AnimatedIcons.menu_close,
+                                  progress: _animationMenu,
+                                  color: AppColors.lightBlue,
                                 ),
                               ),
-                              _buildFolders(state),
-                              _buildChats(state),
-                            ],
-                          ),
-                          Positioned(
-                            bottom: 43,
-                            left: -45,
-                            child: Stack(
-                              children: [
-                                AnimatedBuilder(
-                                  animation: _animationBackgroundIcon,
-                                  builder: (_, child) {
-                                    return Transform.rotate(
-                                      angle: _animationBackgroundIcon.value * 2 * math.pi,
-                                      child: child,
-                                    );
-                                  },
-                                  child: Image.asset('assets/images/gear.png'),
-                                ),
-                                Positioned.fill(
-                                  child: IconButton(
-                                    onPressed: () {
-                                      toggleIcon();
-                                      _toggleFolders = !_toggleFolders;
-                                    },
-                                    icon: Padding(
-                                      padding: const EdgeInsets.only(left: 20.0),
-                                      child: AnimatedIcon(
-                                        icon: AnimatedIcons.menu_close,
-                                        progress: _animationMenu,
-                                        color: AppColors.colorMenu,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ],
                       ),
-                    );
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ),
@@ -164,7 +164,6 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   }
 
   Widget _buildChats(ChatState state) {
-    
     if (state.status != ChatStatus.loading && state.chats.isEmpty) {
       return const Text('Chats not found');
     }

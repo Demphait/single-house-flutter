@@ -4,7 +4,7 @@ import 'package:single_house/styles/app_text_styles.dart';
 
 extension AppButtonStyles on ButtonStyle {
   static ButtonStyle get primaryButton => ButtonStyle(
-        textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.styleTextField.white),
+        textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.primaryTextStyle.white),
         minimumSize: MaterialStateProperty.all<Size>(const Size(360, 45)),
         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -20,22 +20,39 @@ class DialogWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(vertical: AppSpace.smd),
-                child: Image(image: AssetImage(chat.img), height: 50, width: 50),
+                child: Image(
+                  width: 50,
+                  height: 50,
+                  image: AssetImage(chat.img),
+                ),
               ),
               AppSpaceBox.smd,
               Expanded(
                 child: Container(
                   height: AppSpace.smd * 2 + 50,
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1, color: AppColors.dividingLine)),
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: AppColors.dividingLine,
+                      ),
+                    ),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [
-                          Expanded(child: Text(chat.name, style: AppTextStyles.styleTextField.white)),
-                          Text(chat.time, style: AppTextStyles.styleTextTime.search),
+                          Expanded(
+                            child: Text(
+                              chat.name,
+                              style: AppTextStyles.primaryTextStyle.white,
+                            ),
+                          ),
+                          Text(
+                            chat.time,
+                            style: AppTextStyles.smallTextStyle.grey,
+                          ),
                         ],
                       ),
                       SizedBox(height: AppSpace.xsm),
@@ -44,7 +61,7 @@ class DialogWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               chat.dialog,
-                              style: AppTextStyles.styleTextField.search,
+                              style: AppTextStyles.primaryTextStyle.grey,
                             ),
                           ),
                           Container(
