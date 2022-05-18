@@ -19,7 +19,7 @@ class LoadingWrapper extends StatelessWidget {
         if (isLoading)
           Container(
             child: AppLoader(),
-            color: AppColors.black.withOpacity(0.1),
+            color: AppColors.black.withOpacity(0.2),
           ),
       ],
     );
