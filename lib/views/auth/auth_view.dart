@@ -24,8 +24,6 @@ class AuthView extends StatefulWidget {
 
 class _AuthViewState extends State<AuthView> {
   final formKey = GlobalKey<FormState>();
-  String login = '';
-  String password = '';
   final PageController _pageController = PageController();
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -45,8 +43,15 @@ class _AuthViewState extends State<AuthView> {
                   controller: _pageController,
                   children: <Widget>[
                     LoginWidget(
-                        formKey: formKey, loginController: _loginController, passController: _passwordController),
-                    RegisterWidget(formKey: formKey, passController: _passwordController),
+                      formKey: formKey,
+                      loginController: _loginController,
+                      passController: _passwordController,
+                    ),
+                    RegisterWidget(
+                      formKey: formKey,
+                      loginController: _loginController,
+                      passController: _passwordController,
+                    ),
                   ],
                 ),
                 Padding(
@@ -60,9 +65,6 @@ class _AuthViewState extends State<AuthView> {
                           name: 'Username',
                           controller: _loginController,
                           validator: ValidateLogin(isRequired: true).validation,
-                          onChanged: (value) => setState(() {
-                            login = value;
-                          }),
                         ),
                         AppSpaceBox.md,
                         AppTextField(
@@ -71,11 +73,6 @@ class _AuthViewState extends State<AuthView> {
                           textInputAction: TextInputAction.done,
                           controller: _passwordController,
                           validator: ValidatePassword(isRequired: true).validation,
-                          onChanged: (value) => setState(
-                            () {
-                              password = value;
-                            },
-                          ),
                         ),
                       ],
                     ),

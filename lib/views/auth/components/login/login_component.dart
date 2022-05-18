@@ -5,7 +5,6 @@ import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
 
-
 class LoginWidget extends StatefulWidget {
   const LoginWidget({
     Key? key,
@@ -52,8 +51,10 @@ class _LoginWidgetState extends State<LoginWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  widget.formKey.currentState?.validate();
-                  _cubit.loading();
+                  if (widget.formKey.currentState?.validate() == true) {
+                    _cubit.submit(widget.loginController.text, widget.passController.text);
+                    _cubit.loading();
+                  }
                 },
                 child: const Text('Login'),
                 style: AppButtonStyles.primaryButton,
