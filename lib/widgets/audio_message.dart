@@ -4,29 +4,40 @@ import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 
-class TextMessage extends StatelessWidget {
-  const TextMessage({
+class AudioMessage extends StatelessWidget {
+  const AudioMessage({
     Key? key,
     required this.message,
   }) : super(key: key);
-
   final ChatMessage message;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 250,
       padding: EdgeInsets.symmetric(horizontal: AppSpace.smd, vertical: AppSpace.sm),
       margin: EdgeInsets.only(top: AppSpace.xsm),
       decoration: BoxDecoration(
-        color: message.isSender ? AppColors.mediumGrey : AppColors.darkGrey,
         borderRadius: BorderRadius.circular(30),
+        color: message.isSender ? AppColors.mediumGrey : AppColors.darkGrey,
       ),
       child: Row(
         children: [
-          Text(message.text),
-          const SizedBox(width: 10),
+          const Icon(
+            Icons.play_circle,
+            size: 36,
+          ),
+          SizedBox(width: AppSpace.sm),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              height: 2,
+              color: AppColors.white,
+            ),
+          ),
+          SizedBox(width: AppSpace.sm),
           Padding(
-            padding: EdgeInsets.only(top: AppSpace.sm),
+            padding: EdgeInsets.only(top: AppSpace.md),
             child: Row(
               children: [
                 Text(
