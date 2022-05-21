@@ -49,7 +49,7 @@ class _FolderWidgetState extends State<FolderWidget> {
           backgroundColor: MaterialStateProperty.all<Color>(
             _isActiveButton
                 ? AppColors.primary // true
-                : AppColors.unactiveFolder, // false
+                : AppColors.lightBlue, // false
           ),
         ),
       ),

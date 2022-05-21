@@ -8,25 +8,26 @@ extension AppTextStyles on TextStyle {
     fontFamily: '',
   );
 
-  static TextStyle get styleTextField => const TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.w400,
-    fontFamily: '',
-  );
-
-  static TextStyle get styleTextTime => const TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-    fontFamily: '',
-  );
-
-  static TextStyle get styleSearchField => const TextStyle(
+  static TextStyle get secondTitle => const TextStyle(
     fontSize: 17,
     fontWeight: FontWeight.w400,
     fontFamily: '',
   );
 
-  static TextStyle get styleTextError => const TextStyle(
+  static TextStyle get primaryTextStyle => const TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    fontFamily: '',
+  );
+
+  static TextStyle get smallTextStyle => const TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: '',
+  );
+
+
+  static TextStyle get mediumTextStyle => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     fontFamily: '',
@@ -35,6 +36,6 @@ extension AppTextStyles on TextStyle {
   TextStyle get black => copyWith(color: AppColors.black);
   TextStyle get white => copyWith(color: AppColors.white);
   TextStyle get primary => copyWith(color: AppColors.primary);
-  TextStyle get search => copyWith(color: AppColors.search);
+  TextStyle get grey => copyWith(color: AppColors.grey);
   TextStyle get red => copyWith(color: AppColors.red);
 }
