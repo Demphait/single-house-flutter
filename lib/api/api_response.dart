@@ -1,9 +1,9 @@
-import 'dart:convert';
 
-class ApiResponse {
+
+class ApiResponse<T> {
   final bool success;
   final int code;
-  final dynamic data;
+  final T data;
 
   factory ApiResponse.success(int code, [dynamic data]) =>
       ApiResponse(success: true, code: code, data: data);
@@ -20,7 +20,7 @@ class ApiResponse {
   ApiResponse copyWith({
     bool? success,
     int? code,
-    dynamic data,
+    T? data,
   }) {
     return ApiResponse(
       success: success ?? this.success,
@@ -29,41 +29,7 @@ class ApiResponse {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'success': success,
-      'code': code,
-      'data': data,
-    };
+  ApiResponse<T> setData<T>(T newData) {
+    return ApiResponse<T>(success: success, code: code, data: newData);
   }
-
-  factory ApiResponse.fromMap(Map<String, dynamic> map) {
-    return ApiResponse(
-      success: map['success'] ?? false,
-      code: map['code']?.toInt() ?? 0,
-      data: map['data'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ApiResponse.fromJson(String source) =>
-      ApiResponse.fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'ApiResponse(success: $success, code: $code, data: $data)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ApiResponse &&
-        other.success == success &&
-        other.code == code &&
-        other.data == data;
-  }
-
-  @override
-  int get hashCode => success.hashCode ^ code.hashCode ^ data.hashCode;
 }
