@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 
 
 part 'login_state.dart';
@@ -10,5 +11,9 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginState.loading);
     await Future.delayed(const Duration(seconds: 2));
       return emit(LoginState.init);
+  }
+
+  void submit(String loginController, String passwordController) {
+
   }
 }

@@ -1,33 +1,26 @@
 part of 'chat_cubit.dart';
 
-// enum States {loadedChats, emptyChats, loadingChats}
-//enum StatesFolders {loadedFolders, emptyFolders, loadingFolders}
+enum ChatStatus { ready, loading }
 
 class ChatState {
-  // final States states;
-  //final StatesFolders statesFolders;
-  final List<ChatModel>? chats;
-  final List<FolderModel>? folders;
+  final ChatStatus status;
+  final List<ChatModel> chats;
+  final List<FolderModel> folders;
   ChatState({
-    //this.statesFolders = StatesFolders.loadingFolders,
-    // this.states = States.loadingChats,
-    //this.chats = const [],
-    this.chats,
-    this.folders,
+    this.status = ChatStatus.loading,
+    this.chats = const [],
+    this.folders = const [],
   });
 
-  ChatState copyWith ({
-    // States? states,
-    //StatesFolders? statesFolders,
-    List<ChatModel>? chats, 
+  ChatState copyWith({
+    ChatStatus? status,
+    List<ChatModel>? chats,
     List<FolderModel>? folders,
   }) {
     return ChatState(
-      // states: states ?? this.states,
-      //statesFolders: statesFolders ?? this.statesFolders,
+      status: status ?? this.status,
       chats: chats ?? this.chats,
-      folders: folders ?? this.folders
+      folders: folders ?? this.folders,
     );
   }
 }
-
