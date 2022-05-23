@@ -3,10 +3,35 @@ import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 
-class ChatInputField extends StatelessWidget {
+class ChatInputField extends StatefulWidget {
   const ChatInputField({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<ChatInputField> createState() => _ChatInputFieldState();
+}
+
+class _ChatInputFieldState extends State<ChatInputField> {
+  bool _isVisible = true;
+
+  final TextEditingController _textEditingController = TextEditingController();
+
+  String? _textControllerMethod(String text) {
+    text = _textEditingController.text;
+    if (text.isNotEmpty) {
+      setState(() {
+        _isVisible = false;
+      });
+      return text;
+    }
+    if (text.isEmpty) {
+      setState(() {
+        _isVisible = true;
+      });
+    }
+    return text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +54,40 @@ class ChatInputField extends StatelessWidget {
                   color: AppColors.lightGrey,
                 ),
                 color: AppColors.darkBlack,
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: TextField(
-                      maxLines: null,
-                      textInputAction: TextInputAction.newline,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: AppSpace.sm),
-                        isDense: true,
-                        hintText: 'Message',
-                        hintStyle: AppTextStyles.primaryTextStyle.grey,
-                        border: InputBorder.none,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: AppSpace.sm),
+                      child: Scrollbar(
+                        child: TextField(
+                          controller: _textEditingController,
+                          onChanged: _textControllerMethod,
+                          minLines: 1,
+                          maxLines: 5,
+                          keyboardType: TextInputType.multiline,
+                          textInputAction: TextInputAction.newline,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(bottom: AppSpace.sm),
+                            isDense: true,
+                            hintText: 'Message',
+                            hintStyle: AppTextStyles.primaryTextStyle.grey,
+                            border: InputBorder.none,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  ImageIcon(
-                    const AssetImage('assets/icons/sticker.png'),
-                    size: 24,
-                    color: AppColors.primary,
+                  Visibility(
+                    visible: _isVisible,
+                    child: ImageIcon(
+                      const AssetImage('assets/icons/sticker.png'),
+                      size: 24,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ],
               ),
