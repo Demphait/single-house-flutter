@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/widgets/chat_input_field.dart';
-import 'package:single_house/widgets/dialog_app_bar.dart';
-import 'package:single_house/widgets/message.dart';
+import 'package:single_house/views/dialog/widgets/chat_input_field.dart';
+import 'package:single_house/views/dialog/widgets/dialog_app_bar.dart';
+import 'package:single_house/views/dialog/widgets/message.dart';
 
 class DialogView extends StatefulWidget {
   const DialogView({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _DialogViewState extends State<DialogView> {
           Expanded(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: AppSpace.sm),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.sm, vertical: AppSpace.sm),
               itemCount: demoChat.length,
               itemBuilder: (context, index) => Message(message: demoChat[index]),
             ),
@@ -44,4 +44,3 @@ class _DialogViewState extends State<DialogView> {
     );
   }
 }
-

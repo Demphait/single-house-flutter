@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_colors.dart';
+import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 
 class DialogAppBar extends StatelessWidget {
@@ -34,21 +35,14 @@ class DialogAppBar extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(right: AppSpace.md),
+            child: const CircleAvatar(
+              backgroundImage: AssetImage('assets/images/avatar.png'),
+            ),
+          ),
         ],
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.only(right: 16),
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/avatar.png'),
-          ),
-          // child: Image(
-          //   image: AssetImage('assets/images/avatar.png'),
-          //   width: 40,
-          //   height: 40,
-          // ),
-        ),
-      ],
     );
   }
 }
