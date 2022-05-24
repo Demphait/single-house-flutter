@@ -10,7 +10,7 @@ class TextMessage extends StatelessWidget {
   }) : super(key: key);
 
   // final TextMessageModel message;
-  final DialogModel message;
+  final TextMessageModel message;
 
   @override
   Widget build(BuildContext context) {

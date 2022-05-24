@@ -9,7 +9,7 @@ class ImageMessange extends StatelessWidget {
     required this.message,
   }) : super(key: key);
   // final ImageMessageModel message;
-  final DialogModel message;
+  final ImageMessageModel message;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
+import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/views/dialog/widgets/audio_message.dart';
 import 'package:single_house/views/dialog/widgets/file_message.dart';
 import 'package:single_house/views/dialog/widgets/image_message.dart';
@@ -13,18 +14,18 @@ class Message extends StatelessWidget {
     Key? key,
     required this.message,
   }) : super(key: key);
-  final DialogModel message;
+  final DialogModel message; // даункаст
 
   Widget typeMessage(DialogModel message) {
-    switch (message.messageType) {
-      case ChatMessageType.text:
-        return TextMessage(message: message);
-      case ChatMessageType.audio:
-        return AudioMessage(message: message);
-      case ChatMessageType.image:
-        return ImageMessange(message: message);
-      case ChatMessageType.file:
-        return FileMessange(message: message);
+    switch (message.runtimeType) {
+      case TextMessageModel:
+        return TextMessage(message: message as TextMessageModel);
+      case VoiceMessageModel:
+        return AudioMessage(message: message as VoiceMessageModel);
+      case ImageMessageModel:
+        return ImageMessange(message: message as ImageMessageModel);
+      case FileMessageModel:
+        return FileMessange(message: message as FileMessageModel);
       default:
         return const SizedBox();
     }
@@ -48,7 +49,21 @@ class Message extends StatelessWidget {
           children: [
             Flexible(child: typeMessage(message)),
             SizedBox(width: AppSpace.sm),
-            TimeStatusWidget(time: message.time, status: message.messageStatus),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (message is VoiceMessageModel)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: AppSpace.sm),
+                    child: Text(
+                      '00:05',
+                      style: AppTextStyles.smallTextStyle.grey,
+                    ),
+                  ),
+                TimeStatusWidget(time: message.time, status: message.messageStatus),
+              ],
+            ),
           ],
         ),
       ),

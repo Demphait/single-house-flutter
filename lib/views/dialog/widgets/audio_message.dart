@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 
 class AudioMessage extends StatelessWidget {
   AudioMessage({
@@ -12,8 +11,7 @@ class AudioMessage extends StatelessWidget {
     Key? key,
     required this.message,
   }) : super(key: key);
-  // final VoiceMessageModel message;
-  final DialogModel message;
+  final VoiceMessageModel message;
 
   final Random random = Random();
   List<int> get biteArray => List.generate(random.nextInt(50) + 10, (index) => random.nextInt(255));
@@ -24,20 +22,9 @@ class AudioMessage extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: AppSpace.smd),
-              child: const Icon(
-                Icons.play_circle,
-                size: 36,
-              ),
-            ),
-            Text(
-              '00:05',
-              style: AppTextStyles.smallTextStyle.grey,
-            ),
-          ],
+        const Icon(
+          Icons.play_circle,
+          size: 36,
         ),
         SizedBox(width: AppSpace.sm),
         for (var i = 0; i < min(array.length, 30); i++) _buildPoint(array[i]),

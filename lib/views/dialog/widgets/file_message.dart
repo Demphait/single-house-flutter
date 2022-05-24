@@ -9,7 +9,7 @@ class FileMessange extends StatelessWidget {
     required this.message,
   }) : super(key: key);
   // final DialogModel message;
-   final DialogModel message;
+   final FileMessageModel message;
 
   @override
   Widget build(BuildContext context) {
