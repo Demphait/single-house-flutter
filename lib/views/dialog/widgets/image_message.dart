@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
+import 'package:single_house/views/dialog/widgets/size_file_widget.dart';
 
 class ImageMessange extends StatelessWidget {
   const ImageMessange({
@@ -20,17 +21,18 @@ class ImageMessange extends StatelessWidget {
           image: AssetImage(message.sourceFile),
         ),
         SizedBox(width: AppSpace.smd),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(message.fileName),
-            Text(
-              message.sizeFile.toString() + ' MB', 
-              style: AppTextStyles.mediumTextStyle.grey,
-            ),
-          ],
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(message.fileName),
+              SizeFile(fileSize: message.sizeFile),
+            ],
+          ),
         ),
       ],
     );
   }
 }
+
+

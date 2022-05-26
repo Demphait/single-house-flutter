@@ -4,8 +4,9 @@ import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 
 class ChatInputField extends StatefulWidget {
-  const ChatInputField({Key? key, required this.focusNode}) : super(key: key);
-  final FocusNode focusNode;
+  const ChatInputField({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ChatInputField> createState() => _ChatInputFieldState();
@@ -41,9 +42,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                 padding: EdgeInsets.symmetric(vertical: AppSpace.sm),
                 child: Scrollbar(
                   child: TextField(
-                    focusNode: widget.focusNode,
                     controller: _textEditingController,
-                    onTap: widget.focusNode.requestFocus,
                     minLines: 1,
                     maxLines: 5,
                     keyboardType: TextInputType.multiline,

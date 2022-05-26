@@ -1,3 +1,5 @@
+import 'package:single_house/utils/random.dart';
+
 enum ChatMessageType { text, audio, image, file }
 enum MessageStatus { notSent, notView, viewed } //waiting?
 
@@ -43,7 +45,7 @@ class VoiceMessageModel extends DialogModel {
 class ImageMessageModel extends DialogModel {
   final String fileName;
   final String sourceFile;
-  final double sizeFile; 
+  final double sizeFile;
   ImageMessageModel({
     required String time,
     required MessageStatus messageStatus,
@@ -74,176 +76,42 @@ class FileMessageModel extends DialogModel {
         );
 }
 
-List<DialogModel> get demoChat => [
-      TextMessageModel(
-        text: 'Hello master',
-        time: '11:40',
-        messageStatus: MessageStatus.notSent,
-        isSender: false,
-      ),
-      TextMessageModel(
-        text: 'Hey my slave guy',
-        time: '11:41',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:42',
-        messageStatus: MessageStatus.viewed,
-        isSender: false,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      TextMessageModel(
-        text: 'Check out this',
-        time: '11:44',
-        messageStatus: MessageStatus.notView,
-        isSender: true,
-      ),
-      ImageMessageModel(
-        fileName: 'dick_pick.png',
-        sourceFile: 'assets/images/image.png',
-        sizeFile: 2.8,
-        time: '11:45',
-        messageStatus: MessageStatus.notView,
-        isSender: true,
-      ),
-      FileMessageModel(
-        fileName: 'bill.txt',
-        sizeFile: 0.8,
-        time: '11:46',
-        messageStatus: MessageStatus.notView,
-        isSender: false,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-      VoiceMessageModel(
-        filename: '',
-        time: '11:43',
-        messageStatus: MessageStatus.viewed,
-        isSender: true,
-      ),
-    ];
+List<DialogModel> get demoChat2 => List.generate(50, (index) {
+      int messageType = 4.rand;
+      bool isSender = 2.rand == 1;
+      MessageStatus messageStatus = MessageStatus.values[MessageStatus.values.length.rand];
+      String time = '00:' + (50 - index).toString();
+      switch (messageType) {
+        case 0:
+          return TextMessageModel(
+            time: time,
+            isSender: isSender,
+            text: 'a' * (50.rand + 1),
+            messageStatus: messageStatus,
+          );
+        case 1:
+          return VoiceMessageModel(
+            time: time,
+            isSender: isSender,
+            filename: 'a',
+            messageStatus: messageStatus,
+          );
+        case 2:
+          return FileMessageModel(
+            time: time,
+            isSender: isSender,
+            fileName: 'a' * (50.rand + 1),
+            sizeFile: 0.5.rand + 0.9,
+            messageStatus: messageStatus,
+          );
+        default:
+          return ImageMessageModel(
+            time: time,
+            isSender: isSender,
+            fileName: 'a' * (50.rand + 1),
+            sourceFile: 'assets/images/image.png',
+            sizeFile: 0.8.rand + 0.1,
+            messageStatus: messageStatus,
+          );
+      }
+    });

@@ -21,8 +21,14 @@ class DialogView extends StatefulWidget {
 }
 
 class _DialogViewState extends State<DialogView> {
+  late final List<DialogModel> _demoChat;
   final ScrollController _scrollController = ScrollController();
-  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    _demoChat = demoChat2;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -32,45 +38,28 @@ class _DialogViewState extends State<DialogView> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: Scaffold(
-        floatingActionButton: ScrollDownWidget(scrollController: _scrollController, focusNode: _focusNode),
-        backgroundColor: Colors.grey,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: DialogAppBar(),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: AppSpace.sm, vertical: AppSpace.sm),
-                itemCount: demoChat.length,
-                itemBuilder: (context, index) => Message(message: demoChat[index]),
-              ),
+    return Scaffold(
+      floatingActionButton: ScrollDownWidget(scrollController: _scrollController),
+      backgroundColor: Colors.grey,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: DialogAppBar(),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              reverse: true,
+              controller: _scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.sm, vertical: AppSpace.sm),
+              itemCount: _demoChat.length,
+              itemBuilder: (context, index) => Message(message: _demoChat[index]),
             ),
-            ChatInputField(focusNode: _focusNode),
-          ],
-        ),
+          ),
+          const ChatInputField(),
+        ],
       ),
     );
   }
 }
-
-
-// WillPopScope(
-    //   onWillPop: () async {
-    //     var currentFocus = FocusScope.of(context);
-    //     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-    //       FocusManager.instance.primaryFocus?.unfocus();
-    //       currentFocus.focusedChild?.unfocus();
-    //       return false;
-    //     } else {
-    //       return true;
-    //     }
-    //   },

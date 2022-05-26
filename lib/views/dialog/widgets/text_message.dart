@@ -17,7 +17,12 @@ class TextMessage extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(message.text, style: AppTextStyles.primaryTextStyle.white),
+        Flexible(
+          child: Text(
+            message.text,
+            style: AppTextStyles.primaryTextStyle.white,
+          ),
+        ),
         SizedBox(width: AppSpace.smd),
       ],
     );

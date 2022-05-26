@@ -37,10 +37,14 @@ class Message extends StatelessWidget {
       alignment: message.isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: AppSpace.sm, vertical: AppSpace.sm),
-        margin: EdgeInsets.only(top: AppSpace.xsm),
+        margin: EdgeInsets.only(
+          top: AppSpace.xsm,
+          right: !message.isSender ? AppSpace.def : 0,
+          left: message.isSender ? AppSpace.def : 0,
+        ),
         decoration: BoxDecoration(
           color: message.isSender ? AppColors.mediumGrey : AppColors.darkGrey,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
