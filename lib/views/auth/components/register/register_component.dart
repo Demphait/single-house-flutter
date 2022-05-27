@@ -6,7 +6,6 @@ import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/validation/validate.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
-import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
 import 'package:single_house/views/auth/components/register/cubit/register_cubit.dart';
 import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/app_textfield.dart';
@@ -28,11 +27,7 @@ class RegisterWidget extends StatefulWidget {
 
 class _RegisterWidgetState extends State<RegisterWidget> {
   final RegisterCubit _registerCubit = RegisterCubit();
-  final LoginCubit _loginCubit = LoginCubit();
   final formKey = GlobalKey<FormState>();
-  String email = '';
-  String cofirmPassword = '';
-  String invite = '';
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cofirmPasswordController = TextEditingController();
   final TextEditingController _inviteController = TextEditingController();
@@ -65,13 +60,16 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formKey.currentState?.validate();
-                  widget.formKey.currentState?.validate();
-                  if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
-                    _registerCubit.submit(_emailController, _cofirmPasswordController, _inviteController);
-                    _loginCubit.submit(widget.loginController, widget.passController);
-                    _registerCubit.loading();
-                  }
+                  // if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
+                    _registerCubit.submit(
+                      widget.loginController.text,
+                      widget.passController.text,
+                      _emailController.text,
+                      _cofirmPasswordController.text,
+                      _inviteController.text,
+                    );
+                    // _registerCubit.loading();
+                  // }
                 },
                 child: const Text('Register'),
                 style: AppButtonStyles.primaryButton,
@@ -91,9 +89,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     textInputType: TextInputType.emailAddress,
                     controller: _emailController,
                     validator: ValidateEmail(isRequired: true).validation,
-                    onChanged: (value) => setState(() {
-                      email = value;
-                    }),
                   ),
                   AppSpaceBox.md,
                   const Opacity(
