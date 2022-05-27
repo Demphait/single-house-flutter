@@ -16,20 +16,15 @@ class _ScrollDownWidgetState extends State<ScrollDownWidget> {
   bool _isButtonVisible = false;
 
   _scrollListener() {
-    double _scrollPosition;
     if (widget.scrollController.hasClients) {
-      _scrollPosition = widget.scrollController.position.pixels;
-      print('$_scrollPosition');
       if (!_isButtonVisible && widget.scrollController.offset > 100) {
         setState(() {
-          print('true');
           _isButtonVisible = true;
         });
         return;
       }
       if (_isButtonVisible && widget.scrollController.offset < 100) {
         setState(() {
-          print('end');
           _isButtonVisible = false;
         });
         return;

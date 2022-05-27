@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/models/dialog_model.dart';
+
+import 'package:single_house/models/image_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
+
 import 'package:single_house/views/dialog/widgets/size_file_widget.dart';
 
 class ImageMessange extends StatelessWidget {
@@ -34,5 +35,3 @@ class ImageMessange extends StatelessWidget {
     );
   }
 }
-
-

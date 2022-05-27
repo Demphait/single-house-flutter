@@ -3,6 +3,7 @@ import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/dialog/widgets/chat_input_field.dart';
+import 'package:single_house/views/dialog/widgets/demo_dialog.dart';
 import 'package:single_house/views/dialog/widgets/dialog_app_bar.dart';
 import 'package:single_house/views/dialog/widgets/message.dart';
 import 'package:single_house/views/dialog/widgets/scroll_down_widget.dart';

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/models/dialog_model.dart';
+import 'package:single_house/models/file_message_model.dart';
+import 'package:single_house/models/image_message_model.dart';
+import 'package:single_house/models/text_message_model.dart';
+import 'package:single_house/models/voice_message_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
