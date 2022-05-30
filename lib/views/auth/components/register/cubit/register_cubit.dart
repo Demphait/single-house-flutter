@@ -13,22 +13,22 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterState.init);
 
   Future<void> submit(
-    String loginController,
-    String passController,
-    String emailController,
-    String cofirmPasswordController,
-    String inviteController,
+    String login,
+    String pass,
+    String email,
+    String cofirmPassword,
+    String invite,
   ) async {
     emit(RegisterState.loading);
 
-    final bites = utf8.encode(passController);
+    final bites = utf8.encode(pass);
     final digest = sha256.convert(bites);
 
     final resp = await AuthNetwork.register(
-      login: loginController,
+      login: login,
       password: digest.toString(),
-      email: emailController,
-      invite: inviteController,
+      email: email,
+      invite: invite,
     );
     if (resp.success) {
       ApiCore.setTokens(resp.data!.token, null);
