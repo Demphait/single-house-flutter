@@ -9,6 +9,12 @@ extension AppTextStyles on TextStyle {
   );
 
   static TextStyle get secondTitle => const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w400,
+    fontFamily: '',
+  );
+
+  static TextStyle get largeTextStyle => const TextStyle(
     fontSize: 17,
     fontWeight: FontWeight.w400,
     fontFamily: '',

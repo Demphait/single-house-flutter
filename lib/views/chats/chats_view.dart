@@ -3,6 +3,7 @@ import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
+import 'package:single_house/views/settings/settings_view.dart';
 import 'package:single_house/widgets/dialog_item.dart';
 import 'package:single_house/widgets/layout/folder_linear_layout.dart';
 import 'package:single_house/widgets/layout/folder_wrap_layout.dart';
@@ -131,7 +132,8 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                             child: IconButton(
                               onPressed: () {
                                 toggleIcon();
-                                _toggleFolders = !_toggleFolders;
+                                // _toggleFolders = !_toggleFolders;
+                                RouterCore.push(SettingsView.name);
                               },
                               icon: Padding(
                                 padding: const EdgeInsets.only(left: 20.0),

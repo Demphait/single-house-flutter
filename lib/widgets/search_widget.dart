@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: AppTextStyles.secondTitle.grey,
+      style: AppTextStyles.largeTextStyle.grey,
       textAlign: TextAlign.left,
       focusNode: _focusNode,
       keyboardType: TextInputType.text,
@@ -33,13 +33,13 @@ class SearchWidget extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     'Search for messages or users',
-                    style: AppTextStyles.secondTitle.grey,
+                    style: AppTextStyles.largeTextStyle.grey,
                   ),
                 ],
               )
             : Icon(Icons.search, color: AppColors.grey),
         hintText: 'Search for messages or users',
-        hintStyle: AppTextStyles.secondTitle.grey,
+        hintStyle: AppTextStyles.largeTextStyle.grey,
         filled: true,
         fillColor: Colors.black.withAlpha(45),
         enabledBorder: const OutlineInputBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/example/example_view.dart';
+import 'package:single_house/views/settings/settings_view.dart';
 
 abstract class RouterList {
   static String get defaultRoute => AuthView.name;
@@ -17,5 +18,6 @@ abstract class RouterList {
         ExampleView.name: (arg) => ExampleView.route(), 
         AuthView.name: (arg) => AuthView.route(),
         ChatsView.name: (arg) => ChatsView.route(),
+        SettingsView.name: (arg) => SettingsView.route(),
       };
 }
