@@ -30,11 +30,6 @@ class _SettingWidgetState extends State<SettingWidget> {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(vertical: AppSpace.smd),
-                // child: ImageIcon(
-                //   AssetImage(widget.icon),
-                //   size: 40,
-                //   color: null,
-                // ),
                 child: SvgPicture.asset(widget.icon, width: 40, height: 40),
               ),
               AppSpaceBox.smd,
@@ -69,15 +64,6 @@ class _SettingWidgetState extends State<SettingWidget> {
                               size: 30,
                               color: AppColors.grey,
                             ),
-                            // child: IconButton(
-                            //   onPressed: () {},
-                            //   icon: Icon(
-                            //     Icons.navigate_next_sharp,
-                            //     color: AppColors.grey,
-                            //   ),
-                            //   // padding: EdgeInsets.zero,
-                            //   // constraints: const BoxConstraints(),
-                            // ),
                           ),
                         ],
                       ),

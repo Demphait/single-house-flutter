@@ -27,10 +27,6 @@ class _ToggleSettingState extends State<ToggleSetting> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: AppSpace.smd),
-            // child: ImageIcon(
-            //   AssetImage(widget.icon),
-            //   size: 40,
-            // ),
             child: SvgPicture.asset(widget.icon, width: 40, height: 40),
           ),
           AppSpaceBox.smd,
