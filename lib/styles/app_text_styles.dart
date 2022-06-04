@@ -21,7 +21,7 @@ extension AppTextStyles on TextStyle {
   );
 
   static TextStyle get primaryTextStyle => const TextStyle(
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: FontWeight.w400,
     fontFamily: '',
   );
