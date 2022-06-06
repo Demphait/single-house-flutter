@@ -32,6 +32,7 @@ class _SettingsViewState extends State<SettingsView> {
             const ToggleSetting(name: 'Dark Mode', icon: 'assets/icons/dark_mode.svg'),
             const ToggleSetting(name: 'Scroll Folder', icon: 'assets/icons/folder.svg'),
             const SettingWidget(name: 'Login', icon: 'assets/icons/login.svg', info: 'm.me/Ricardo_M'),
+            const SettingWidget(name: 'Password', icon: 'assets/icons/pass.svg', info: '*********'),
             const SettingWidget(name: 'Email', icon: 'assets/icons/email.svg', info: 'example@gmail.com'),
             const SettingWidget(name: 'Language', icon: 'assets/icons/language.svg', info: 'English'),
             const Spacer(),

@@ -23,7 +23,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
       child: Row(
         children: [
           ImageIcon(
-            const AssetImage('assets/icons/attach_icon.png'),
+            const AssetImage('assets/images/attach_icon.png'),
             size: 24,
             color: AppColors.primary,
           ),
@@ -61,7 +61,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
           ),
           const SizedBox(width: 10),
           ImageIcon(
-            const AssetImage('assets/icons/mic.png'),
+            const AssetImage('assets/images/mic.png'),
             size: 24,
             color: AppColors.primary,
           ),
