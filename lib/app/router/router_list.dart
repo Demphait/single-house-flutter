@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
+import 'package:single_house/views/dialog/dialog_view.dart';
 import 'package:single_house/views/example/example_view.dart';
 import 'package:single_house/views/settings/settings_view.dart';
 
