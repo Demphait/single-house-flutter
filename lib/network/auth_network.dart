@@ -29,4 +29,25 @@ class AuthNetwork {
     }
     return resp.setData<AuthResponseModel?>(null);
   }
+
+  static Future<ApiResponse<AuthResponseModel?>> login({
+    required String login,
+    required String password,
+  }) async {
+    ApiResponse resp = await ApiCore.post(
+      '/login',
+      data: {
+        'login': login,
+        'password': password,
+      },
+    );
+    if (resp.success) {
+      try {
+        return resp.setData<AuthResponseModel>(AuthResponseModel.fromMap(resp.data));
+      } catch (e) {
+        log(e.toString());
+      }
+    }
+    return resp.setData<AuthResponseModel?>(null);
+  }
 }
