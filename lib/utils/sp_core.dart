@@ -11,15 +11,15 @@ abstract class SpCore {
     await _prefs.setString('osafkj', accessToken ?? '');
   }
 
-  static void getAccessToken(String? accessToken) {
-    _prefs.getString('osafkj');
+  static String getAccessToken() {
+    return _prefs.getString('osafkj') ?? '';
   }
 
   static Future<void> setRefreshToken(String? refreshToken) async {
     await _prefs.setString('osafkj', refreshToken ?? '');
   }
 
-  static void getRefreshToken(String? refreshToken) {
+  static void getRefreshToken() {
     _prefs.getString('osafkj');
   }
 }
