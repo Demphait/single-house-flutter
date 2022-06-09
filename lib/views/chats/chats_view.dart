@@ -132,7 +132,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                           Positioned.fill(
                             child: IconButton(
                               onPressed: () {
-                                toggleIcon();
+                                // toggleIcon();
                                 // _toggleFolders = !_toggleFolders;
                                 RouterCore.push(SettingsView.name);
                               },

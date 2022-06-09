@@ -12,8 +12,8 @@ class ChatCubit extends Cubit<ChatState> {
     List<ChatModel> chats = List.generate(
         50,
         (index) => ChatModel(
-              name: 'Ricardo Milos',
-              dialog: 'Do you wanna play with me?',
+              name: 'Emma Watson',
+              dialog: 'Nice to meet you',
               time: '11:47',
               counterMessage: '1',
               img: 'assets/images/avatar.png',
