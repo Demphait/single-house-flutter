@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
+import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/widgets/avatar_widget.dart';
 import 'package:single_house/widgets/setting_widget.dart';
 import 'package:single_house/widgets/switch_setting.dart';
@@ -31,7 +32,7 @@ class _SettingsViewState extends State<SettingsView> {
         child: Column(
           children: [
             SizedBox(height: AppSpace.xlg),
-            const Center(child: AvatarWidget(name: 'Ricardo Millos', avatar: 'assets/images/avatar.png')),
+            const Center(child: AvatarWidget(name: 'Emma Watson', avatar: 'assets/images/avatar.png')),
             const SizedBox(height: 52),
             ToggleSetting(
               name: 'Dark Mode',
@@ -47,6 +48,7 @@ class _SettingsViewState extends State<SettingsView> {
               icon: 'assets/icons/folder.svg',
               function: (bool switchValue) {
                 _toggleFolders = switchValue;
+                SpCore.setFolderSetting(_toggleFolders);
               },
             ),
             const SettingWidget(name: 'Login', icon: 'assets/icons/login.svg', info: 'm.me/Ricardo_M'),

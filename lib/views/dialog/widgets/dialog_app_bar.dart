@@ -30,7 +30,7 @@ class DialogAppBar extends StatelessWidget {
           Expanded(
             child: Center(
               child: Text(
-                'Ricardo Millos',
+                'Emma Watson',
                 style: AppTextStyles.largeTextStyle.white,
               ),
             ),

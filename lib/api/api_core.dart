@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:single_house/api/api_response.dart';
+import 'package:single_house/utils/sp_core.dart';
 
 import 'request.dart';
 
@@ -19,6 +20,8 @@ abstract class ApiCore {
     _dio.options.headers.addAll({
       'accessToken': 'Beerer $accessToken',
     });
+    SpCore.setAccessToken(accessToken);
+    SpCore.setRefreshToken(refreshToken);
   }
 
   static Future<ApiResponse> get(
@@ -49,4 +52,3 @@ abstract class ApiCore {
         jsonResp: jsonResponse,
       ).work();
 }
-

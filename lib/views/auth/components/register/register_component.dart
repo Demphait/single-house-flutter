@@ -60,7 +60,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
+                  if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
                     _registerCubit.submit(
                       widget.loginController.text,
                       widget.passController.text,
@@ -69,7 +69,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       _inviteController.text,
                     );
                     // _registerCubit.loading();
-                  // }
+                  }
                 },
                 child: const Text('Register'),
                 style: AppButtonStyles.primaryButton,
