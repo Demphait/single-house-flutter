@@ -8,18 +8,18 @@ abstract class SpCore {
   }
 
   static Future<void> setAccessToken(String? accessToken) async {
-    await _prefs.setString('osafkj', accessToken ?? '');
+    await _prefs.setString('accessTokenKey', accessToken ?? '');
   }
 
   static String getAccessToken() {
-    return _prefs.getString('osafkj') ?? '';
+    return _prefs.getString('accessTokenKey') ?? '';
   }
 
   static Future<void> setRefreshToken(String? refreshToken) async {
-    await _prefs.setString('osafkj', refreshToken ?? '');
+    await _prefs.setString('refreshTokenKey', refreshToken ?? '');
   }
 
-  static void getRefreshToken() {
-    _prefs.getString('osafkj');
+  static String getRefreshToken() {
+    return _prefs.getString('refreshTokenKey') ?? '';
   }
 }
