@@ -7,11 +7,15 @@ import 'package:single_house/styles/app_text_styles.dart';
 class ToggleSetting extends StatefulWidget {
   const ToggleSetting({
     Key? key,
-    required this.icon,
     required this.name,
+    required this.icon,
+    required this.function,
+    // required this.switchValue,
   }) : super(key: key);
-  final String icon;
   final String name;
+  final String icon;
+  final Function function;
+  // final bool switchValue;
 
   @override
   State<ToggleSetting> createState() => _ToggleSettingState();
@@ -19,6 +23,7 @@ class ToggleSetting extends StatefulWidget {
 
 class _ToggleSettingState extends State<ToggleSetting> {
   bool _switchValue = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -56,6 +61,7 @@ class _ToggleSettingState extends State<ToggleSetting> {
                         onChanged: (value) {
                           setState(() {
                             _switchValue = value;
+                            widget.function(_switchValue);
                           });
                         },
                       ),

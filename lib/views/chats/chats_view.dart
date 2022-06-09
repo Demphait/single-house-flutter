@@ -13,8 +13,6 @@ import 'package:single_house/widgets/search_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
 
-void toggleIcon() {}
-
 class ChatsView extends StatefulWidget {
   const ChatsView({Key? key}) : super(key: key);
   static const String name = 'ChatsView';
@@ -132,7 +130,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                           Positioned.fill(
                             child: IconButton(
                               onPressed: () {
-                                toggleIcon();
+                                // toggleIcon();
                                 // _toggleFolders = !_toggleFolders;
                                 RouterCore.push(SettingsView.name);
                               },
