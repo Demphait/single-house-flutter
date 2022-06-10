@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/sp_core.dart';
+import 'package:single_house/utils/theme_provider.dart';
 import 'package:single_house/widgets/avatar_widget.dart';
 import 'package:single_house/widgets/setting_widget.dart';
 import 'package:single_house/widgets/switch_setting.dart';
@@ -21,13 +23,14 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-  bool _background = true;
+  // bool _background = SpCore.getDarkModeSetting();
   bool _toggleFolders = SpCore.getFolderSetting();
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: _background ? Colors.black : Colors.grey,
+      // backgroundColor: _background ? Colors.black : Colors.grey,
       body: SafeArea(
         child: Column(
           children: [
@@ -37,10 +40,15 @@ class _SettingsViewState extends State<SettingsView> {
             ToggleSetting(
               name: 'Dark Mode',
               icon: 'assets/icons/dark_mode.svg',
-              switchValue: _background,
-              function: (bool switchValue) {
+              switchValue: themeProvider.isDarkMode,
+              function: (bool switchValue) async {
+                // setState(() {
+                //   _background = switchValue;
+                // });
+                // await SpCore.setDarkModeSetting(_background);
+                final provider = Provider.of<ThemeProvider>(context, listen: false);
                 setState(() {
-                  _background = switchValue;
+                  provider.toggleTheme(switchValue);
                 });
               },
             ),

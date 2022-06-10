@@ -35,7 +35,6 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   late AnimationController _animationBackgroundIcon;
   late AnimationController _animationMenu;
   bool _isExpandedSearch = false;
-  final bool _toggleFolders = SpCore.getFolderSetting();
   bool _isPlaying = false;
 
   _scrollListener() {
@@ -87,7 +86,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
     return BlocProvider(
       create: (context) => _cubit..fetch(),
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        // backgroundColor: AppColors.background,
         body: SafeArea(
           child: BlocBuilder<ChatCubit, ChatState>(
             builder: (context, state) {
@@ -159,6 +158,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   }
 
   Widget _buildFolders(ChatState state) {
+    final bool _toggleFolders = SpCore.getFolderSetting();
     if (state.folders.isEmpty) {
       return const SizedBox();
     }

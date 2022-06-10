@@ -32,7 +32,7 @@ class _AuthViewState extends State<AuthView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      // backgroundColor: AppColors.background,
       body: Column(
         children: [
           Expanded(

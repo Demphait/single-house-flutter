@@ -5,7 +5,7 @@ import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/utils/e_core.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/auth/auth_view.dart';
-import 'package:single_house/views/dialog/dialog_view.dart';
+import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/widgets/app_loader.dart';
 
 class SplashView extends StatefulWidget {
@@ -37,7 +37,7 @@ class _SplashViewState extends State<SplashView> {
       return RouterCore.push(AuthView.name);
     }
     ApiCore.setTokens(accessToken, null);
-    RouterCore.push(DialogView.name);
+    RouterCore.push(ChatsView.name);
   }
 
   @override

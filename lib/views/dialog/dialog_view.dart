@@ -41,7 +41,7 @@ class _DialogViewState extends State<DialogView> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: ScrollDownWidget(scrollController: _scrollController),
-      backgroundColor: Colors.grey,
+      // backgroundColor: Colors.grey,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: DialogAppBar(),
