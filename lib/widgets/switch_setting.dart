@@ -9,11 +9,13 @@ class ToggleSetting extends StatefulWidget {
     Key? key,
     required this.name,
     required this.icon,
+    required this.switchValue,
     required this.function,
     // required this.switchValue,
   }) : super(key: key);
   final String name;
   final String icon;
+  final bool switchValue;
   final Function function;
   // final bool switchValue;
 
@@ -22,10 +24,11 @@ class ToggleSetting extends StatefulWidget {
 }
 
 class _ToggleSettingState extends State<ToggleSetting> {
-  bool _switchValue = true;
+  // bool _switchValue = true;
 
   @override
   Widget build(BuildContext context) {
+    bool _switchValue = widget.switchValue;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSpace.md),
       child: Row(
@@ -58,11 +61,11 @@ class _ToggleSettingState extends State<ToggleSetting> {
                       const Spacer(),
                       CupertinoSwitch(
                         value: _switchValue,
-                        onChanged: (value) {
+                        onChanged: (value) async {
                           setState(() {
                             _switchValue = value;
-                            widget.function(_switchValue);
                           });
+                          await widget.function(_switchValue);
                         },
                       ),
                     ],

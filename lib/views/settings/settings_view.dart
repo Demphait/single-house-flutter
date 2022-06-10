@@ -22,7 +22,7 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   bool _background = true;
-  bool _toggleFolders = false;
+  bool _toggleFolders = SpCore.getFolderSetting();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class _SettingsViewState extends State<SettingsView> {
             ToggleSetting(
               name: 'Dark Mode',
               icon: 'assets/icons/dark_mode.svg',
+              switchValue: _background,
               function: (bool switchValue) {
                 setState(() {
                   _background = switchValue;
@@ -46,9 +47,12 @@ class _SettingsViewState extends State<SettingsView> {
             ToggleSetting(
               name: 'Scroll Folder',
               icon: 'assets/icons/folder.svg',
-              function: (bool switchValue) {
-                _toggleFolders = switchValue;
-                SpCore.setFolderSetting(_toggleFolders);
+              switchValue: _toggleFolders,
+              function: (bool switchValue) async {
+                setState(() {
+                  _toggleFolders = switchValue;
+                });
+                await SpCore.setFolderSetting(_toggleFolders);
               },
             ),
             const SettingWidget(name: 'Login', icon: 'assets/icons/login.svg', info: 'm.me/Ricardo_M'),

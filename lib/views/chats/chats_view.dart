@@ -35,7 +35,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   late AnimationController _animationBackgroundIcon;
   late AnimationController _animationMenu;
   bool _isExpandedSearch = false;
-  bool _toggleFolders = SpCore.getFolderSetting();
+  final bool _toggleFolders = SpCore.getFolderSetting();
   bool _isPlaying = false;
 
   _scrollListener() {
