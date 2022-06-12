@@ -53,7 +53,7 @@ class _SettingsViewState extends State<SettingsView> {
                   isDarkMode = switchValue;
                   provider.toggleTheme(switchValue);
                 });
-                await SpCore.setDarkModeSetting(isDarkMode);
+                
               },
             ),
             ToggleSetting(

@@ -32,7 +32,6 @@ extension AppTextStyles on TextStyle {
         fontFamily: '',
       );
 
-
   static TextStyle get mediumTextStyle => const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
@@ -44,4 +43,6 @@ extension AppTextStyles on TextStyle {
   TextStyle get primary => copyWith(color: AppColors.primary);
   TextStyle get grey => copyWith(color: AppColors.grey);
   TextStyle get red => copyWith(color: AppColors.red);
+  TextStyle theme(TextStyle textStyle) => textStyle.merge(this);
+
 }

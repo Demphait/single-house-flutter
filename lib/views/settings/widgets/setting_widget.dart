@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +39,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                     border: Border(
                       bottom: BorderSide(
                         width: 1,
-                        color: AppColors.dividingLine,
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
                   ),

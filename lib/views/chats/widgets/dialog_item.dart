@@ -36,7 +36,7 @@ class DialogWidget extends StatelessWidget {
                     border: Border(
                       bottom: BorderSide(
                         width: 1,
-                        color: AppColors.dividingLine,
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
                   ),
@@ -48,12 +48,12 @@ class DialogWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               chat.name,
-                              style: AppTextStyles.primaryTextStyle.white,
+                              style: AppTextStyles.primaryTextStyle,
                             ),
                           ),
                           Text(
                             chat.time,
-                            style: AppTextStyles.smallTextStyle.grey,
+                            style: Theme.of(context).textTheme.bodyLarge // ОСТАНОВИЛСЯ ТУТ
                           ),
                         ],
                       ),

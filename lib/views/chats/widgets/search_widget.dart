@@ -54,7 +54,7 @@ class SearchWidget extends StatelessWidget {
             Radius.circular(10),
           ),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 13),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       ),
     );
   }
