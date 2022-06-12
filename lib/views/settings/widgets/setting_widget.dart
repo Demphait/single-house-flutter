@@ -55,14 +55,23 @@ class _SettingWidgetState extends State<SettingWidget> {
                             style: AppTextStyles.largeTextStyle,
                           ),
                           const Spacer(),
-                          Text(widget.info, style: AppTextStyles.largeTextStyle.grey),
+                          // Text(widget.info, style: AppTextStyles.largeTextStyle.grey),
+                          Text(
+                            widget.info,
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: '',
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
                           Container(
                             padding: EdgeInsets.zero,
                             width: 30,
                             child: Icon(
                               Icons.navigate_next_sharp,
                               size: 30,
-                              color: AppColors.grey,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ],

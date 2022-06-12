@@ -5,9 +5,9 @@ import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/utils/theme_provider.dart';
-import 'package:single_house/widgets/avatar_widget.dart';
-import 'package:single_house/widgets/setting_widget.dart';
-import 'package:single_house/widgets/switch_setting.dart';
+import 'package:single_house/views/settings/widgets/avatar_widget.dart';
+import 'package:single_house/views/settings/widgets/setting_widget.dart';
+import 'package:single_house/views/settings/widgets/switch_setting.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -25,10 +25,11 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   // bool _background = SpCore.getDarkModeSetting();
   bool _toggleFolders = SpCore.getFolderSetting();
+  bool isDarkMode = SpCore.getDarkModeSetting();
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       // backgroundColor: _background ? Colors.black : Colors.grey,
       body: SafeArea(
@@ -39,8 +40,9 @@ class _SettingsViewState extends State<SettingsView> {
             const SizedBox(height: 52),
             ToggleSetting(
               name: 'Dark Mode',
-              icon: 'assets/icons/dark_mode.svg',
-              switchValue: themeProvider.isDarkMode,
+              icon: 'assets/icons/dark.svg',
+              // switchValue: themeProvider.isDarkMode,
+              switchValue: isDarkMode,
               function: (bool switchValue) async {
                 // setState(() {
                 //   _background = switchValue;
@@ -48,8 +50,10 @@ class _SettingsViewState extends State<SettingsView> {
                 // await SpCore.setDarkModeSetting(_background);
                 final provider = Provider.of<ThemeProvider>(context, listen: false);
                 setState(() {
+                  isDarkMode = switchValue;
                   provider.toggleTheme(switchValue);
                 });
+                await SpCore.setDarkModeSetting(isDarkMode);
               },
             ),
             ToggleSetting(

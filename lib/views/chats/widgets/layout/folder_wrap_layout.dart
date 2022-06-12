@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/models/folder_model.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/widgets/folder_widget.dart';
+import 'package:single_house/views/chats/widgets/folder_widget.dart';
 
 class FolderWrapLayout extends StatelessWidget {
   const FolderWrapLayout({
