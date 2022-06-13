@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/validation/validate.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
@@ -53,7 +52,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               const SizedBox(height: 93),
               Text(
                 'Register',
-                style: AppTextStyles.title.white,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Expanded(
                 child: Container(),

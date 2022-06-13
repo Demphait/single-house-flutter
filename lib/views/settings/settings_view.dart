@@ -94,7 +94,6 @@ class _SettingsViewState extends State<SettingsView> {
                   RouterCore.push(AuthView.name);
                 },
               ),
-              //const Spacer(),
               const SizedBox(height: 30),
               Padding(
                 padding: EdgeInsets.only(bottom: AppSpace.sm),
@@ -103,10 +102,6 @@ class _SettingsViewState extends State<SettingsView> {
                   style: AppTextStyles.smallTextStyle.grey,
                 ),
               ),
-              // Text(
-              //   'Signal House - version 0.1',
-              //   style: AppTextStyles.smallTextStyle.grey,
-              // ),
             ],
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/validation/validate_login.dart';
 import 'package:single_house/utils/validation/validate_password.dart';
@@ -10,7 +9,6 @@ import 'components/login/login_component.dart';
 import 'components/register/register_component.dart';
 
 class AuthView extends StatefulWidget {
-  //const AuthWidget({ Key? key }) : super(key: key);
   static const String name = 'AuthView';
   static PageRoute route() => RouterCore.createRoute(
         const AuthView._(),
@@ -32,7 +30,6 @@ class _AuthViewState extends State<AuthView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // backgroundColor: AppColors.background,
       body: Column(
         children: [
           Expanded(

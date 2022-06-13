@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_button_styles.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/views/auth/components/login/cubit/login_cubit.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/widgets/app_loader.dart';
@@ -46,7 +45,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               const SizedBox(height: 93),
               Text(
                 'Login',
-                style: AppTextStyles.title.white,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Expanded(
                 child: Container(),
