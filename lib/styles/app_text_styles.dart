@@ -43,6 +43,7 @@ extension AppTextStyles on TextStyle {
   TextStyle get primary => copyWith(color: AppColors.primary);
   TextStyle get grey => copyWith(color: AppColors.grey);
   TextStyle get red => copyWith(color: AppColors.red);
+  TextStyle get mediumGrey => copyWith(color: AppColors.mediumGrey);
   TextStyle theme(TextStyle textStyle) => textStyle.merge(this);
 
 }

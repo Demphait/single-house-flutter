@@ -15,20 +15,42 @@ class ThemeProvider extends ChangeNotifier {
 
 class AppThemes {
   static ThemeData get darkTheme => ThemeData(
-    scaffoldBackgroundColor: AppColors.background,
-    textTheme: TextTheme(bodyLarge: AppTextStyles.smallTextStyle.primary),
-    primaryColor: AppColors.grey,
-    colorScheme: const ColorScheme.dark(),
-    iconTheme: IconThemeData(color: AppColors.primary),
-    dividerColor: AppColors.dividingLine,
-  );
+        scaffoldBackgroundColor: AppColors.background,
+        backgroundColor: AppColors.mediumGrey,
+        selectedRowColor: AppColors.dividingLine, //AppColors.dividingLine
+        primaryColorLight: AppColors.darkGrey, //AppColors.darkGrey
+        textTheme: TextTheme(
+          bodyLarge: AppTextStyles.smallTextStyle.grey,
+          titleLarge: AppTextStyles.largeTextStyle.grey,
+          displayLarge: AppTextStyles.largeTextStyle.white,
+          headlineLarge: AppTextStyles.smallTextStyle.white,
+          labelMedium: AppTextStyles.largeTextStyle.grey,
+        ),
+        primaryColor: AppColors.grey,
+        colorScheme: const ColorScheme.dark(),
+        iconTheme: IconThemeData(color: AppColors.white),
+        dividerColor: AppColors.dividingLine,
+        primaryColorDark: AppColors.grey,
+        hintColor: AppColors.darkBlack,
+      );
 
   static ThemeData get lightTheme => ThemeData(
-    scaffoldBackgroundColor: AppColors.white,
-    textTheme: TextTheme(bodyLarge: AppTextStyles.smallTextStyle.grey),
-    primaryColor: Colors.grey[500],
-    colorScheme: const ColorScheme.light(),
-    iconTheme: IconThemeData(color: AppColors.primary),
-    dividerColor: Colors.grey[300],
-  );
+        scaffoldBackgroundColor: AppColors.white,
+        backgroundColor: AppColors.dividerColorLight,
+        selectedRowColor: AppColors.white,
+        primaryColorLight: AppColors.secondGrey,
+        textTheme: TextTheme(
+          bodyLarge: AppTextStyles.smallTextStyle.grey,
+          titleLarge: AppTextStyles.largeTextStyle.mediumGrey,
+          displayLarge: AppTextStyles.largeTextStyle.mediumGrey,
+          headlineLarge: AppTextStyles.smallTextStyle.grey,
+          labelMedium: AppTextStyles.largeTextStyle.grey,
+        ),
+        primaryColor: AppColors.lightGrey,
+        colorScheme: const ColorScheme.light(),
+        iconTheme: IconThemeData(color: AppColors.mediumGrey),
+        dividerColor: AppColors.dividerColorLight,
+        primaryColorDark: AppColors.mediumGrey,
+        hintColor: AppColors.white,
+      );
 }

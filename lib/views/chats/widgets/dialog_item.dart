@@ -51,10 +51,7 @@ class DialogWidget extends StatelessWidget {
                               style: AppTextStyles.primaryTextStyle,
                             ),
                           ),
-                          Text(
-                            chat.time,
-                            style: Theme.of(context).textTheme.bodyLarge // ОСТАНОВИЛСЯ ТУТ
-                          ),
+                          Text(chat.time, style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       SizedBox(height: AppSpace.xsm),
@@ -68,7 +65,10 @@ class DialogWidget extends StatelessWidget {
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 0.5, horizontal: 4),
-                            child: Text(chat.counterMessage),
+                            child: Text(
+                              chat.counterMessage,
+                              style: TextStyle(color: AppColors.white),
+                            ),
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               color: AppColors.primary,

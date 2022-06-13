@@ -55,15 +55,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                           ),
                           const Spacer(),
                           // Text(widget.info, style: AppTextStyles.largeTextStyle.grey),
-                          Text(
-                            widget.info,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: '',
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
+                          Text(widget.info, style: Theme.of(context).textTheme.labelMedium),
                           Container(
                             padding: EdgeInsets.zero,
                             width: 30,

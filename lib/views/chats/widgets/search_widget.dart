@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: AppTextStyles.largeTextStyle.grey,
+      style: Theme.of(context).textTheme.titleLarge,
       textAlign: TextAlign.left,
       focusNode: _focusNode,
       keyboardType: TextInputType.text,
@@ -29,11 +29,11 @@ class SearchWidget extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.search, color: AppColors.grey),
+                  Icon(Icons.search, color: Theme.of(context).primaryColorDark),
                   const SizedBox(width: 5),
                   Text(
                     'Search for messages or users',
-                    style: AppTextStyles.largeTextStyle.grey,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
               )
