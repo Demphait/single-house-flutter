@@ -25,6 +25,7 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  bool isHidePassword = true;
   final RegisterCubit _registerCubit = RegisterCubit();
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -100,12 +101,30 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     child: AppTextField(name: '1'),
                   ),
                   AppSpaceBox.md,
-                  AppTextField(
-                    name: 'Confirm Password',
-                    obscureText: true,
-                    controller: _cofirmPasswordController,
-                    validator:
-                        ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
+                  Stack(
+                    children: [
+                      AppTextField(
+                        name: 'Confirm Password',
+                        obscureText: isHidePassword,
+                        controller: _cofirmPasswordController,
+                        validator:
+                            ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
+                      ),
+                      Positioned(
+                        right: 10,
+                        top: 8,
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isHidePassword = !isHidePassword;
+                            });
+                          },
+                          icon: isHidePassword
+                              ? const Icon(Icons.remove_red_eye_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
+                      ),
+                    ],
                   ),
                   AppSpaceBox.md,
                   AppTextField(
