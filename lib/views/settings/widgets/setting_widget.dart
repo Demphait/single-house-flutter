@@ -9,10 +9,12 @@ class SettingWidget extends StatefulWidget {
     required this.icon,
     required this.name,
     required this.info,
+    required this.func,
   }) : super(key: key);
   final String icon;
   final String name;
   final String info;
+  final void Function() func;
 
   @override
   State<SettingWidget> createState() => _SettingWidgetState();
@@ -78,7 +80,9 @@ class _SettingWidgetState extends State<SettingWidget> {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                widget.func();
+              },
             ),
           ),
         ),
