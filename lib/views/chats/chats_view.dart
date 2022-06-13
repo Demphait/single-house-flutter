@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
