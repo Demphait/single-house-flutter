@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/models/text_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 
 class TextMessage extends StatelessWidget {
   const TextMessage({
@@ -20,7 +19,7 @@ class TextMessage extends StatelessWidget {
         Flexible(
           child: Text(
             message.text,
-            style: AppTextStyles.primaryTextStyle.white,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         SizedBox(width: AppSpace.smd),

@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:single_house/models/voice_message_model.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 
 class AudioMessage extends StatelessWidget {
@@ -27,14 +26,14 @@ class AudioMessage extends StatelessWidget {
           size: 36,
         ),
         SizedBox(width: AppSpace.sm),
-        for (var i = 0; i < min(array.length, 30); i++) _buildPoint(array[i]),
+        for (var i = 0; i < min(array.length, 30); i++) _buildPoint(array[i], context),
       ],
     );
   }
 
-  Widget _buildPoint(int i) {
+  Widget _buildPoint(int i, BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.white),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Theme.of(context).iconTheme.color),
       width: 2,
       height: max(2, i / 255 * 20),
       margin: const EdgeInsets.only(right: 2),
