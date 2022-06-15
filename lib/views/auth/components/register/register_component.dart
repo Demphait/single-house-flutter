@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/validation/validate.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
@@ -26,6 +25,7 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  bool isHidePassword = true;
   final RegisterCubit _registerCubit = RegisterCubit();
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -53,7 +53,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               const SizedBox(height: 93),
               Text(
                 'Register',
-                style: AppTextStyles.title.white,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Expanded(
                 child: Container(),
@@ -101,12 +101,30 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     child: AppTextField(name: '1'),
                   ),
                   AppSpaceBox.md,
-                  AppTextField(
-                    name: 'Confirm Password',
-                    obscureText: true,
-                    controller: _cofirmPasswordController,
-                    validator:
-                        ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
+                  Stack(
+                    children: [
+                      AppTextField(
+                        name: 'Confirm Password',
+                        obscureText: isHidePassword,
+                        controller: _cofirmPasswordController,
+                        validator:
+                            ValidateConfirmPass(isRequired: true, passwordController: widget.passController).validation,
+                      ),
+                      Positioned(
+                        right: 10,
+                        top: 8,
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isHidePassword = !isHidePassword;
+                            });
+                          },
+                          icon: isHidePassword
+                              ? const Icon(Icons.remove_red_eye_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
+                      ),
+                    ],
                   ),
                   AppSpaceBox.md,
                   AppTextField(

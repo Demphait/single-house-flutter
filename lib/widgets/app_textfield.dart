@@ -41,7 +41,7 @@ class _AppTextFieldState extends State<AppTextField> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: AppSpace.sm),
           child: TextFormField(
-            style: AppTextStyles.primaryTextStyle.white,
+            style: Theme.of(context).textTheme.headlineMedium,
             keyboardType: widget.textInputType,
             textInputAction: widget.textInputAction,
             obscureText: widget.obscureText,
@@ -64,7 +64,7 @@ class _AppTextFieldState extends State<AppTextField> {
             decoration: InputDecoration(
               errorStyle: const TextStyle(height: 0, fontSize: 0),
               labelText: widget.name,
-              labelStyle: AppTextStyles.primaryTextStyle.white,
+              labelStyle: Theme.of(context).textTheme.headlineMedium,
               //isCollapsed: true,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.primary, width: 2),

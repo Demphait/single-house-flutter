@@ -40,8 +40,8 @@ class _DialogViewState extends State<DialogView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: ScrollDownWidget(scrollController: _scrollController),
-      backgroundColor: Colors.grey,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: DialogAppBar(),

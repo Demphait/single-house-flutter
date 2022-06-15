@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/validation/validate_login.dart';
 import 'package:single_house/utils/validation/validate_password.dart';
@@ -10,7 +9,6 @@ import 'components/login/login_component.dart';
 import 'components/register/register_component.dart';
 
 class AuthView extends StatefulWidget {
-  //const AuthWidget({ Key? key }) : super(key: key);
   static const String name = 'AuthView';
   static PageRoute route() => RouterCore.createRoute(
         const AuthView._(),
@@ -23,6 +21,7 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
+  bool isHidePassword = true;
   final formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController();
   final TextEditingController _loginController = TextEditingController();
@@ -32,7 +31,6 @@ class _AuthViewState extends State<AuthView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
       body: Column(
         children: [
           Expanded(
@@ -67,12 +65,30 @@ class _AuthViewState extends State<AuthView> {
                           validator: ValidateLogin(isRequired: true).validation,
                         ),
                         AppSpaceBox.md,
-                        AppTextField(
-                          name: 'Password',
-                          obscureText: true,
-                          textInputAction: TextInputAction.done,
-                          controller: _passwordController,
-                          validator: ValidatePassword(isRequired: true).validation,
+                        Stack(
+                          children: [
+                            AppTextField(
+                              name: 'Password',
+                              obscureText: isHidePassword,
+                              textInputAction: TextInputAction.done,
+                              controller: _passwordController,
+                              validator: ValidatePassword(isRequired: true).validation,
+                            ),
+                            Positioned(
+                              right: 10,
+                              top: 8,
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isHidePassword = !isHidePassword;
+                                  });
+                                },
+                                icon: isHidePassword
+                                    ? const Icon(Icons.remove_red_eye_outlined)
+                                    : const Icon(Icons.visibility_off_outlined),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

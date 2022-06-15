@@ -36,7 +36,7 @@ class DialogWidget extends StatelessWidget {
                     border: Border(
                       bottom: BorderSide(
                         width: 1,
-                        color: AppColors.dividingLine,
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
                   ),
@@ -48,13 +48,10 @@ class DialogWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               chat.name,
-                              style: AppTextStyles.primaryTextStyle.white,
+                              style: AppTextStyles.primaryTextStyle,
                             ),
                           ),
-                          Text(
-                            chat.time,
-                            style: AppTextStyles.smallTextStyle.grey,
-                          ),
+                          Text(chat.time, style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       SizedBox(height: AppSpace.xsm),
@@ -68,7 +65,10 @@ class DialogWidget extends StatelessWidget {
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 0.5, horizontal: 4),
-                            child: Text(chat.counterMessage),
+                            child: Text(
+                              chat.counterMessage,
+                              style: TextStyle(color: AppColors.white),
+                            ),
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               color: AppColors.primary,

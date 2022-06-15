@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:single_house/models/dialog_model.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 
 class TimeStatusWidget extends StatelessWidget {
   const TimeStatusWidget({
@@ -20,7 +19,7 @@ class TimeStatusWidget extends StatelessWidget {
       children: [
         Text(
           time,
-          style: AppTextStyles.smallTextStyle.grey,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         SizedBox(width: AppSpace.xsm),
         Icon(

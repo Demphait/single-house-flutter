@@ -4,9 +4,7 @@ import 'package:single_house/models/file_message_model.dart';
 import 'package:single_house/models/image_message_model.dart';
 import 'package:single_house/models/text_message_model.dart';
 import 'package:single_house/models/voice_message_model.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
-import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/views/dialog/widgets/audio_message.dart';
 import 'package:single_house/views/dialog/widgets/file_message.dart';
 import 'package:single_house/views/dialog/widgets/image_message.dart';
@@ -47,7 +45,7 @@ class Message extends StatelessWidget {
           left: message.isSender ? AppSpace.def : 0,
         ),
         decoration: BoxDecoration(
-          color: message.isSender ? AppColors.mediumGrey : AppColors.darkGrey,
+          color: message.isSender ? Theme.of(context).selectedRowColor : Theme.of(context).primaryColorLight,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -66,7 +64,7 @@ class Message extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: AppSpace.sm),
                     child: Text(
                       '00:05',
-                      style: AppTextStyles.smallTextStyle.grey,
+                      style: message.isSender ? Theme.of(context).textTheme.headlineLarge : Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
                 TimeStatusWidget(time: message.time, status: message.messageStatus),

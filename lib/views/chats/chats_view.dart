@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
+import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
+import 'package:single_house/views/chats/widgets/layout/folder_linear_layout.dart';
+import 'package:single_house/views/chats/widgets/layout/folder_wrap_layout.dart';
 import 'package:single_house/views/settings/settings_view.dart';
-
-import 'package:single_house/widgets/dialog_item.dart';
-import 'package:single_house/widgets/layout/folder_linear_layout.dart';
-import 'package:single_house/widgets/layout/folder_wrap_layout.dart';
+import 'package:single_house/views/chats/widgets/dialog_item.dart';
 import 'package:single_house/widgets/loading_wrapper_widget.dart';
-import 'package:single_house/widgets/search_widget.dart';
+import 'package:single_house/views/chats/widgets/search_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
-
-void toggleIcon() {}
 
 class ChatsView extends StatefulWidget {
   const ChatsView({Key? key}) : super(key: key);
@@ -36,7 +33,6 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   late AnimationController _animationBackgroundIcon;
   late AnimationController _animationMenu;
   bool _isExpandedSearch = false;
-  bool _toggleFolders = true;
   bool _isPlaying = false;
 
   _scrollListener() {
@@ -88,7 +84,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
     return BlocProvider(
       create: (context) => _cubit..fetch(),
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        // backgroundColor: AppColors.background,
         body: SafeArea(
           child: BlocBuilder<ChatCubit, ChatState>(
             builder: (context, state) {
@@ -132,17 +128,11 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                           Positioned.fill(
                             child: IconButton(
                               onPressed: () {
-                                // toggleIcon();
-                                // _toggleFolders = !_toggleFolders;
                                 RouterCore.push(SettingsView.name);
                               },
-                              icon: Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: AnimatedIcon(
-                                  icon: AnimatedIcons.menu_close,
-                                  progress: _animationMenu,
-                                  color: AppColors.lightBlue,
-                                ),
+                              icon: const Padding(
+                                padding: EdgeInsets.only(left: 20.0),
+                                child: Icon(Icons.menu),
                               ),
                             ),
                           ),
@@ -160,6 +150,7 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
   }
 
   Widget _buildFolders(ChatState state) {
+    final bool _toggleFolders = SpCore.getFolderSetting();
     if (state.folders.isEmpty) {
       return const SizedBox();
     }

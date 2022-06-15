@@ -19,7 +19,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppSpace.md, vertical: 15),
-      decoration: BoxDecoration(color: AppColors.background),
+      decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
       child: Row(
         children: [
           ImageIcon(
@@ -33,9 +33,9 @@ class _ChatInputFieldState extends State<ChatInputField> {
               padding: EdgeInsets.symmetric(horizontal: AppSpace.smd),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: AppColors.lightGrey,
+                  color: Theme.of(context).backgroundColor,
                 ),
-                color: AppColors.darkBlack,
+                color: Theme.of(context).hintColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(

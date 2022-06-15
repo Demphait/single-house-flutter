@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,10 +9,12 @@ class SettingWidget extends StatefulWidget {
     required this.icon,
     required this.name,
     required this.info,
+    required this.func,
   }) : super(key: key);
   final String icon;
   final String name;
   final String info;
+  final void Function() func;
 
   @override
   State<SettingWidget> createState() => _SettingWidgetState();
@@ -40,7 +41,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                     border: Border(
                       bottom: BorderSide(
                         width: 1,
-                        color: AppColors.dividingLine,
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
                   ),
@@ -55,14 +56,15 @@ class _SettingWidgetState extends State<SettingWidget> {
                             style: AppTextStyles.largeTextStyle,
                           ),
                           const Spacer(),
-                          Text(widget.info, style: AppTextStyles.largeTextStyle.grey),
+                          // Text(widget.info, style: AppTextStyles.largeTextStyle.grey),
+                          Text(widget.info, style: Theme.of(context).textTheme.labelMedium),
                           Container(
                             padding: EdgeInsets.zero,
                             width: 30,
                             child: Icon(
                               Icons.navigate_next_sharp,
                               size: 30,
-                              color: AppColors.grey,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ],
@@ -78,7 +80,9 @@ class _SettingWidgetState extends State<SettingWidget> {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                widget.func();
+              },
             ),
           ),
         ),

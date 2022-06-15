@@ -1,26 +1,34 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 
 class ToggleSetting extends StatefulWidget {
   const ToggleSetting({
     Key? key,
-    required this.icon,
     required this.name,
+    required this.icon,
+    required this.switchValue,
+    required this.function,
+    // required this.switchValue,
   }) : super(key: key);
-  final String icon;
   final String name;
+  final String icon;
+  final bool switchValue;
+  final Future<void> Function(bool switchValue) function;
+  // final bool switchValue;
 
   @override
   State<ToggleSetting> createState() => _ToggleSettingState();
 }
 
 class _ToggleSettingState extends State<ToggleSetting> {
-  bool _switchValue = true;
+  // bool _switchValue = true;
+
   @override
   Widget build(BuildContext context) {
+    bool _switchValue = widget.switchValue;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSpace.md),
       child: Row(
@@ -37,7 +45,7 @@ class _ToggleSettingState extends State<ToggleSetting> {
                 border: Border(
                   bottom: BorderSide(
                     width: 1,
-                    color: AppColors.dividingLine,
+                    color: Theme.of(context).dividerColor,
                   ),
                 ),
               ),
@@ -53,10 +61,11 @@ class _ToggleSettingState extends State<ToggleSetting> {
                       const Spacer(),
                       CupertinoSwitch(
                         value: _switchValue,
-                        onChanged: (value) {
+                        onChanged: (value) async {
                           setState(() {
                             _switchValue = value;
                           });
+                          await widget.function(_switchValue);
                         },
                       ),
                     ],
