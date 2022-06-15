@@ -47,6 +47,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                     maxLines: 5,
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.newline,
+                    style: Theme.of(context).textTheme.headlineMedium,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
                       isDense: true,

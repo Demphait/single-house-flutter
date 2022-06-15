@@ -50,7 +50,11 @@ class _ScrollDownWidgetState extends State<ScrollDownWidget> {
         padding: const EdgeInsets.only(bottom: 64),
         child: FloatingActionButton(
           backgroundColor: AppColors.primary,
-          child: const Icon(Icons.keyboard_arrow_down, size: 36),
+          child: Icon(
+            Icons.keyboard_arrow_down,
+            size: 36,
+            color: AppColors.white,
+          ),
           onPressed: moveUp,
         ),
       ),
