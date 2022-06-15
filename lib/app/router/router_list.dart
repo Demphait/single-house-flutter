@@ -4,10 +4,11 @@ import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/dialog/dialog_view.dart';
 import 'package:single_house/views/example/example_view.dart';
 import 'package:single_house/views/settings/settings_view.dart';
+import 'package:single_house/views/splash/splash_view.dart';
 
 
 abstract class RouterList {
-  static String get defaultRoute => AuthView.name;
+  static String get defaultRoute => SplashView.name;
 
   static Route<dynamic>? onGenerateRoute(RouteSettings args) {
     if (args.name != null && _list[args.name] != null) {
@@ -22,5 +23,6 @@ abstract class RouterList {
         ChatsView.name: (arg) => ChatsView.route(),
         DialogView.name: (arg) => DialogView.route(),
         SettingsView.name: (arg) => SettingsView.route(),
+        SplashView.name: (arg) => SplashView.route(),
       };
 }
