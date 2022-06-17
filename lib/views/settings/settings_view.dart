@@ -14,6 +14,8 @@ import 'package:single_house/views/settings/widgets/setting_widget.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
 import 'dart:math' as math;
 
+import 'package:single_house/views/two_chairs/two_chairs_view.dart';
+
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
   static const String name = 'SettingsView';
@@ -111,6 +113,14 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/language.svg',
                     info: 'English',
                     func: () {},
+                  ),
+                  SettingWidget(
+                    name: 'Two chairs',
+                    icon: 'assets/icons/logout.svg',
+                    info: '',
+                    func: () {
+                      RouterCore.push(TwoChairsView.name);
+                    },
                   ),
                   SettingWidget(
                     name: 'Logout',
