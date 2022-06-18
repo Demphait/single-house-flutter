@@ -64,7 +64,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                             child: Icon(
                               Icons.navigate_next_sharp,
                               size: 30,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).textTheme.labelMedium?.color,
                             ),
                           ),
                         ],

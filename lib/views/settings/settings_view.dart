@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/sp_core.dart';
@@ -151,9 +152,12 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                       onPressed: () {
                         RouterCore.push(ChatsView.name);
                       },
-                      icon: const Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Icon(Icons.arrow_back),
+                      icon: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),

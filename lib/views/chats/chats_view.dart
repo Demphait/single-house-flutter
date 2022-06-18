@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/chats/cubit/chat_cubit.dart';
@@ -130,9 +131,12 @@ class _ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
                               onPressed: () {
                                 RouterCore.push(SettingsView.name);
                               },
-                              icon: const Padding(
-                                padding: EdgeInsets.only(left: 20.0),
-                                child: Icon(Icons.menu),
+                              icon: Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: Icon(
+                                  Icons.menu,
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
