@@ -32,7 +32,7 @@ class _TwoChairsViewState extends State<TwoChairsView> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      color: Colors.transparent,
+      color: Colors.white,
       width: double.infinity,
       height: MediaQuery.of(context).size.height,
     );
@@ -109,40 +109,36 @@ class _TwoChairsViewState extends State<TwoChairsView> {
               controller: _rightController,
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      ReorderableListView.builder(
-                        scrollController: _rightController,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 47),
-                            key: ValueKey('$index'),
-                            title: listTwo[index],
-                          );
-                        },
-                        itemCount: listTwo.length,
-                        onReorder: (oldIndex, newIndex) {
-                          setState(() {
-                            if (newIndex > oldIndex) newIndex--;
-                            final item = listTwo.removeAt(oldIndex);
-                            listTwo.insert(newIndex, item);
-                          });
-                        },
-                      ),
-                      DragTarget<Color>(
-                        builder: (context, candidateData, rejectedData) {
-                          return container(context);
-                        },
-                        onWillAccept: (data) => true,
-                        onAccept: (data) {
-                          setState(() {
-                            listTwo.add(Dragger(color: data));
-                            listOne.removeWhere((element) => element.color == data);
-                          });
-                        },
-                      ),
-                    ],
+                  ReorderableListView.builder(
+                    scrollController: _rightController,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 47),
+                        key: ValueKey('$index'),
+                        title: listTwo[index],
+                      );
+                    },
+                    itemCount: listTwo.length,
+                    onReorder: (oldIndex, newIndex) {
+                      setState(() {
+                        if (newIndex > oldIndex) newIndex--;
+                        final item = listTwo.removeAt(oldIndex);
+                        listTwo.insert(newIndex, item);
+                      });
+                    },
+                  ),
+                  DragTarget<Color>(
+                    builder: (context, candidateData, rejectedData) {
+                      return container(context);
+                    },
+                    onWillAccept: (data) => true,
+                    onAccept: (data) {
+                      setState(() {
+                        listTwo.add(Dragger(color: data));
+                        listOne.removeWhere((element) => element.color == data);
+                      });
+                    },
                   ),
 
                   // ListView.builder(
