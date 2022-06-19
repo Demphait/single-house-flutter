@@ -61,14 +61,16 @@ class _AuthViewState extends State<AuthView> {
                       children: [
                         AppTextField(
                           name: 'Username',
+                          icon: 'assets/icons/user_new.svg',
                           controller: _loginController,
                           validator: ValidateLogin(isRequired: true).validation,
                         ),
-                        AppSpaceBox.md,
+                        // AppSpaceBox.md,
                         Stack(
                           children: [
                             AppTextField(
                               name: 'Password',
+                              icon: 'assets/icons/lock_new.svg',
                               obscureText: isHidePassword,
                               textInputAction: TextInputAction.done,
                               controller: _passwordController,
@@ -76,7 +78,7 @@ class _AuthViewState extends State<AuthView> {
                             ),
                             Positioned(
                               right: 10,
-                              top: 8,
+                              top: 33,
                               child: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -100,7 +102,7 @@ class _AuthViewState extends State<AuthView> {
           Container(
             child: SmoothPageIndicator(controller: _pageController, count: 2),
             padding: EdgeInsets.symmetric(vertical: AppSpace.sm),
-            margin: const EdgeInsets.only(bottom: 78),
+            margin: const EdgeInsets.only(bottom: 50),
           ),
         ],
       ),

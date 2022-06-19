@@ -60,7 +60,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (formKey.currentState?.validate() == true && widget.formKey.currentState?.validate() == true) {
+                  widget.formKey.currentState?.validate();
+                  formKey.currentState?.validate();
+                  if (widget.formKey.currentState?.validate() == true && formKey.currentState?.validate() == true) {
                     _registerCubit.submit(
                       widget.loginController.text,
                       widget.passController.text,
@@ -78,7 +80,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ),
           Padding(
             // 66 - offset for move center, cause of invite
-            padding: EdgeInsets.fromLTRB(AppSpace.md, 76, AppSpace.md, 0),
+            padding: EdgeInsets.fromLTRB(AppSpace.md, 100, AppSpace.md, 0),
             child: Form(
               key: formKey,
               child: Column(
@@ -86,25 +88,25 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 children: [
                   AppTextField(
                     name: 'Email',
+                    icon: 'assets/icons/mail_new.svg',
                     textInputType: TextInputType.emailAddress,
                     controller: _emailController,
                     validator: ValidateEmail(isRequired: true).validation,
                   ),
-                  AppSpaceBox.md,
+                  AppSpaceBox.def,
                   const Opacity(
                     opacity: 0,
-                    child: AppTextField(name: '1'),
+                    child: AppTextField(name: '1', icon: 'assets/icons/pass.svg'),
                   ),
-                  AppSpaceBox.md,
                   const Opacity(
                     opacity: 0,
-                    child: AppTextField(name: '1'),
+                    child: AppTextField(name: '1', icon: 'assets/icons/pass.svg'),
                   ),
-                  AppSpaceBox.md,
                   Stack(
                     children: [
                       AppTextField(
                         name: 'Confirm Password',
+                        icon: 'assets/icons/lock_new.svg',
                         obscureText: isHidePassword,
                         controller: _cofirmPasswordController,
                         validator:
@@ -112,7 +114,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       ),
                       Positioned(
                         right: 10,
-                        top: 8,
+                        top: 33,
                         child: IconButton(
                           onPressed: () {
                             setState(() {
@@ -126,9 +128,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       ),
                     ],
                   ),
-                  AppSpaceBox.md,
                   AppTextField(
                     name: 'Invite',
+                    icon: 'assets/icons/mobile_phone_new.svg',
                     obscureText: false,
                     textInputAction: TextInputAction.done,
                     controller: _inviteController,
