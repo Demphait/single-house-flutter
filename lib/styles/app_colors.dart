@@ -16,5 +16,6 @@ abstract class AppColors {
   static Color get darkBlack => const Color(0xFF060606);
   static Color get darkGrey => const Color(0xFF262628);
   static Color get mediumGrey => const Color(0xFF313131);
+  static Color get textFieldGrey => const Color(0xFF434343);
   static Color get dividerColorLight => const Color(0xFFE0E0E0);
 }

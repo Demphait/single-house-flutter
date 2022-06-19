@@ -9,7 +9,7 @@ extension AppButtonStyles on ButtonStyle {
         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primary),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       );
