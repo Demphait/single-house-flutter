@@ -20,6 +20,7 @@ class AppThemes {
         selectedRowColor: AppColors.dividingLine,
         primaryColorLight: AppColors.darkGrey,
         canvasColor: AppColors.lightBlack,
+        shadowColor: AppColors.lightBlack,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.grey,
@@ -44,6 +45,7 @@ class AppThemes {
         selectedRowColor: AppColors.white,
         primaryColorLight: AppColors.secondGrey,
         canvasColor: AppColors.white,
+        shadowColor: AppColors.grey,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.mediumGrey,
