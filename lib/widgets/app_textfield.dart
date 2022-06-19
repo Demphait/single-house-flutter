@@ -72,13 +72,24 @@ class _AppTextFieldState extends State<AppTextField> {
                 },
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColors.textFieldGrey,
+                  fillColor: Theme.of(context).canvasColor,
                   isCollapsed: true,
-                  border: const OutlineInputBorder(),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  label: SvgPicture.asset(widget.icon, color: AppColors.white),
+                  label: SvgPicture.asset(widget.icon, color: Theme.of(context).iconTheme.color),
                   errorStyle: const TextStyle(height: 0, fontSize: 0),
                   labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.grey, width: 1),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.grey, width: 1),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.grey, width: 1),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.grey, width: 1),
+                  ),
                 ),
               ),
             ],

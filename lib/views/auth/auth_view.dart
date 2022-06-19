@@ -86,8 +86,8 @@ class _AuthViewState extends State<AuthView> {
                                   });
                                 },
                                 icon: isHidePassword
-                                    ? const Icon(Icons.remove_red_eye_outlined)
-                                    : const Icon(Icons.visibility_off_outlined),
+                                    ? Icon(Icons.remove_red_eye_outlined, color: Theme.of(context).iconTheme.color)
+                                    : Icon(Icons.visibility_off_outlined, color: Theme.of(context).iconTheme.color),
                               ),
                             ),
                           ],

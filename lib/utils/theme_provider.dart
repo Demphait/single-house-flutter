@@ -17,8 +17,9 @@ class AppThemes {
   static ThemeData get darkTheme => ThemeData(
         scaffoldBackgroundColor: AppColors.background,
         backgroundColor: AppColors.mediumGrey,
-        selectedRowColor: AppColors.dividingLine, //AppColors.dividingLine
-        primaryColorLight: AppColors.darkGrey, //AppColors.darkGrey
+        selectedRowColor: AppColors.dividingLine,
+        primaryColorLight: AppColors.darkGrey,
+        canvasColor: AppColors.lightBlack,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.grey,
@@ -42,6 +43,7 @@ class AppThemes {
         backgroundColor: AppColors.dividerColorLight,
         selectedRowColor: AppColors.white,
         primaryColorLight: AppColors.secondGrey,
+        canvasColor: AppColors.white,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.mediumGrey,
