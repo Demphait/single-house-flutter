@@ -13,4 +13,14 @@ extension AppButtonStyles on ButtonStyle {
           ),
         ),
       );
+  static ButtonStyle get greyButton => ButtonStyle(
+        textStyle: MaterialStateProperty.all<TextStyle>(AppTextStyles.primaryTextStyle.white),
+        minimumSize: MaterialStateProperty.all<Size>(const Size(360, 45)),
+        backgroundColor: MaterialStateProperty.all<Color>(AppColors.grey),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+      );
 }

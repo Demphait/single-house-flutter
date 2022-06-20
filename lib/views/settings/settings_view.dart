@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
@@ -10,6 +11,10 @@ import 'package:single_house/utils/theme_provider.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/settings/widgets/avatar_widget.dart';
+import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/login_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/mail_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/password_bottom_sheet.dart';
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
 import 'dart:math' as math;
@@ -91,26 +96,46 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                   SettingWidget(
                     name: 'Login',
                     icon: 'assets/icons/login.svg',
-                    info: 'm.me/Ricardo_M',
-                    func: () {},
+                    info: 'sh.me/Ricardo_M',
+                    func: () {
+                      buildModalBottomSheet(
+                        context,
+                        const LoginBottomSheet(),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Password',
                     icon: 'assets/icons/pass.svg',
                     info: '*********',
-                    func: () {},
+                    func: () {
+                      buildModalBottomSheet(
+                        context,
+                        const PasswordBottomSheet(),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Email',
                     icon: 'assets/icons/email.svg',
                     info: 'example@gmail.com',
-                    func: () {},
+                    func: () {
+                      buildModalBottomSheet(
+                        context,
+                        const MailBottomSheet(),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Language',
                     icon: 'assets/icons/language.svg',
                     info: 'English',
-                    func: () {},
+                    func: () {
+                      buildModalBottomSheet(
+                        context,
+                        const LanguageBottomSheet(),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Logout',
@@ -167,6 +192,23 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> buildModalBottomSheet(BuildContext context, Widget widget) {
+    return showModalBottomSheet<void>(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(48),
+          topRight: Radius.circular(48),
+        ),
+      ),
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).backgroundColor,
+      context: context,
+      builder: (BuildContext context) {
+        return widget;
+      },
     );
   }
 }
