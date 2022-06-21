@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
+import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_colors.dart';
@@ -8,16 +9,20 @@ import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/utils/theme_provider.dart';
+import 'package:single_house/utils/validation/validate_confirm_pass.dart';
+import 'package:single_house/utils/validation/validate_email.dart';
+import 'package:single_house/utils/validation/validate_login.dart';
+import 'package:single_house/utils/validation/validate_password.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/settings/widgets/avatar_widget.dart';
-import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/login_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/mail_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/password_bottom_sheet.dart';
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
+import 'package:single_house/views/settings/widgets/settings_modal.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
+import 'package:single_house/widgets/app_passfield.dart';
 import 'dart:math' as math;
+
+import 'package:single_house/widgets/app_textfield.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -37,6 +42,11 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
   bool isDarkMode = SpCore.getDarkModeSetting();
   late AnimationController _animationBackgroundIcon;
   late AnimationController _animationMenu;
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _oldPasswordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _cofirmPasswordController = TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
 
   @override
   void initState() {
@@ -98,9 +108,17 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/login.svg',
                     info: 'sh.me/Ricardo_M',
                     func: () {
-                      buildModalBottomSheet(
-                        context,
-                        const LoginBottomSheet(),
+                      GlobalContext.modalBottomSheet(
+                        SettingsModal(
+                          title: 'Login',
+                          onTap: () async => true,
+                          child: AppTextField(
+                            name: 'Type new login'.toUpperCase(),
+                            icon: 'assets/icons/user_new.svg',
+                            controller: _loginController,
+                            validator: ValidateLogin(isRequired: true).validation,
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -109,9 +127,35 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/pass.svg',
                     info: '*********',
                     func: () {
-                      buildModalBottomSheet(
-                        context,
-                        const PasswordBottomSheet(),
+                      GlobalContext.modalBottomSheet(
+                        SettingsModal(
+                          title: 'Password',
+                          onTap: () async => true,
+                          child: Column(
+                            children: [
+                              AppPassfield(
+                                name: 'Type old password'.toUpperCase(),
+                                icon: 'assets/icons/lock_new.svg',
+                                controller: _oldPasswordController,
+                                validator: ValidatePassword(isRequired: true).validation,
+                              ),
+                              AppPassfield(
+                                name: 'Type new password'.toUpperCase(),
+                                icon: 'assets/icons/lock_new.svg',
+                                controller: _newPasswordController,
+                                validator: ValidatePassword(isRequired: true).validation,
+                              ),
+                              AppPassfield(
+                                name: 'Re-Type new password'.toUpperCase(),
+                                icon: 'assets/icons/lock_new.svg',
+                                controller: _cofirmPasswordController,
+                                validator:
+                                    ValidateConfirmPass(isRequired: true, passwordController: _newPasswordController)
+                                        .validation,
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -120,9 +164,17 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/email.svg',
                     info: 'example@gmail.com',
                     func: () {
-                      buildModalBottomSheet(
-                        context,
-                        const MailBottomSheet(),
+                      GlobalContext.modalBottomSheet(
+                        SettingsModal(
+                          title: 'Email',
+                          onTap: () async => true,
+                          child: AppTextField(
+                            name: 'Type new mail'.toUpperCase(),
+                            icon: 'assets/icons/mail_new.svg',
+                            controller: _mailController,
+                            validator: ValidateEmail(isRequired: true).validation,
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -131,9 +183,30 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/language.svg',
                     info: 'English',
                     func: () {
-                      buildModalBottomSheet(
-                        context,
-                        const LanguageBottomSheet(),
+                      GlobalContext.modalBottomSheet(
+                        SettingsModal(
+                          title: 'Language',
+                          child: Column(
+                            children: [
+                              ElevatedButton(
+                                style: AppButtonStyles.greyButton,
+                                child: const Text('English'),
+                                onPressed: () {
+                                  GlobalContext.showSnackText('Language changed');
+                                  RouterCore.pop(context: context);
+                                },
+                              ),
+                              ElevatedButton(
+                                style: AppButtonStyles.greyButton,
+                                child: const Text('Ukrainian'),
+                                onPressed: () {
+                                  GlobalContext.showSnackText('Мова змінена');
+                                  RouterCore.pop(context: context);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -192,23 +265,6 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
           ],
         ),
       ),
-    );
-  }
-
-  Future<void> buildModalBottomSheet(BuildContext context, Widget widget) {
-    return showModalBottomSheet<void>(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(48),
-          topRight: Radius.circular(48),
-        ),
-      ),
-      isScrollControlled: true,
-      backgroundColor: Theme.of(context).backgroundColor,
-      context: context,
-      builder: (BuildContext context) {
-        return widget;
-      },
     );
   }
 }
