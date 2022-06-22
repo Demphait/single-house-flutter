@@ -3,26 +3,21 @@ import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/styles/app_button_styles.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/utils/theme_provider.dart';
-import 'package:single_house/utils/validation/validate_confirm_pass.dart';
-import 'package:single_house/utils/validation/validate_email.dart';
-import 'package:single_house/utils/validation/validate_login.dart';
-import 'package:single_house/utils/validation/validate_password.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/settings/widgets/avatar_widget.dart';
+import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/login_settings/login_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/email_settings/mail_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/password_settings/password_bottom_sheet.dart';
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
-import 'package:single_house/views/settings/widgets/settings_modal.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
-import 'package:single_house/widgets/app_passfield.dart';
 import 'dart:math' as math;
-
-import 'package:single_house/widgets/app_textfield.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -106,19 +101,10 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                   SettingWidget(
                     name: 'Login',
                     icon: 'assets/icons/login.svg',
-                    info: 'sh.me/Ricardo_M',
+                    info: 'emma_w',
                     func: () {
                       GlobalContext.modalBottomSheet(
-                        SettingsModal(
-                          title: 'Login',
-                          onTap: () async => true,
-                          child: AppTextField(
-                            name: 'Type new login'.toUpperCase(),
-                            icon: 'assets/icons/user_new.svg',
-                            controller: _loginController,
-                            validator: ValidateLogin(isRequired: true).validation,
-                          ),
-                        ),
+                        LoginBottomSheet(loginController: _loginController),
                       );
                     },
                   ),
@@ -128,33 +114,10 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     info: '*********',
                     func: () {
                       GlobalContext.modalBottomSheet(
-                        SettingsModal(
-                          title: 'Password',
-                          onTap: () async => true,
-                          child: Column(
-                            children: [
-                              AppPassfield(
-                                name: 'Type old password'.toUpperCase(),
-                                icon: 'assets/icons/lock_new.svg',
-                                controller: _oldPasswordController,
-                                validator: ValidatePassword(isRequired: true).validation,
-                              ),
-                              AppPassfield(
-                                name: 'Type new password'.toUpperCase(),
-                                icon: 'assets/icons/lock_new.svg',
-                                controller: _newPasswordController,
-                                validator: ValidatePassword(isRequired: true).validation,
-                              ),
-                              AppPassfield(
-                                name: 'Re-Type new password'.toUpperCase(),
-                                icon: 'assets/icons/lock_new.svg',
-                                controller: _cofirmPasswordController,
-                                validator:
-                                    ValidateConfirmPass(isRequired: true, passwordController: _newPasswordController)
-                                        .validation,
-                              ),
-                            ],
-                          ),
+                        PasswordBottomSheet(
+                          oldPasswordController: _oldPasswordController,
+                          newPasswordController: _newPasswordController,
+                          cofirmPasswordController: _cofirmPasswordController,
                         ),
                       );
                     },
@@ -165,16 +128,7 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     info: 'example@gmail.com',
                     func: () {
                       GlobalContext.modalBottomSheet(
-                        SettingsModal(
-                          title: 'Email',
-                          onTap: () async => true,
-                          child: AppTextField(
-                            name: 'Type new mail'.toUpperCase(),
-                            icon: 'assets/icons/mail_new.svg',
-                            controller: _mailController,
-                            validator: ValidateEmail(isRequired: true).validation,
-                          ),
-                        ),
+                        EmailBottomSheet(mailController: _mailController),
                       );
                     },
                   ),
@@ -184,29 +138,7 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     info: 'English',
                     func: () {
                       GlobalContext.modalBottomSheet(
-                        SettingsModal(
-                          title: 'Language',
-                          child: Column(
-                            children: [
-                              ElevatedButton(
-                                style: AppButtonStyles.greyButton,
-                                child: const Text('English'),
-                                onPressed: () {
-                                  GlobalContext.showSnackText('Language changed');
-                                  RouterCore.pop(context: context);
-                                },
-                              ),
-                              ElevatedButton(
-                                style: AppButtonStyles.greyButton,
-                                child: const Text('Ukrainian'),
-                                onPressed: () {
-                                  GlobalContext.showSnackText('Мова змінена');
-                                  RouterCore.pop(context: context);
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                        const LanguageBottomSheet(),
                       );
                     },
                   ),
