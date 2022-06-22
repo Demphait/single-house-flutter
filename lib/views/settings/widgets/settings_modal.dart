@@ -28,14 +28,15 @@ class SettingsModal extends StatelessWidget {
           style: AppButtonStyles.primaryButton,
           child: const Text('Save Changes'),
           onPressed: () async {
-            //ECore.handle(code: 6, message: ''); //TODO
             bool resultValidation = formKey.currentState?.validate() ?? false;
             if (resultValidation) {
               bool result = await onTap!.call();
               if (result) {
                 RouterCore.pop(context: context);
                 GlobalContext.showSnackText('Changes saved');
+                return;
               }
+              // ECore.handle(code: 2, message: '');
             }
           },
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/index.dart';
-import 'package:single_house/views/settings/widgets/settings_modal.dart';
 
 abstract class GlobalContext {
   static BuildContext get context => RouterCore.navigatorKey.currentContext!;
@@ -15,7 +14,7 @@ abstract class GlobalContext {
     showSnackWidget(Text(text));
   }
 
-  static Future<void> modalBottomSheet(SettingsModal settingsModal, {BuildContext? ctx}) {
+  static Future<void> modalBottomSheet(Widget widget, {BuildContext? ctx}) {
     return showModalBottomSheet<void>(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -27,7 +26,7 @@ abstract class GlobalContext {
       backgroundColor: Theme.of(ctx ?? context).backgroundColor,
       context: ctx ?? context,
       builder: (BuildContext context) {
-        return settingsModal;
+        return widget;
       },
     );
   }
