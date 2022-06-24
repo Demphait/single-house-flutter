@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/models/dialog_model.dart';
+import 'package:single_house/models/dialol/dialog_model.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/dialog/widgets/chat_input_field.dart';
 import 'package:single_house/views/dialog/widgets/demo_dialog.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/models/text_message_model.dart';
+import 'package:single_house/models/dialol/text_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
 
 class TextMessage extends StatelessWidget {

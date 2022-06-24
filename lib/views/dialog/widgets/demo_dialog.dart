@@ -1,8 +1,8 @@
-import 'package:single_house/models/dialog_model.dart';
-import 'package:single_house/models/file_message_model.dart';
-import 'package:single_house/models/image_message_model.dart';
-import 'package:single_house/models/text_message_model.dart';
-import 'package:single_house/models/voice_message_model.dart';
+import 'package:single_house/models/dialol/dialog_model.dart';
+import 'package:single_house/models/dialol/file_message_model.dart';
+import 'package:single_house/models/dialol/image_message_model.dart';
+import 'package:single_house/models/dialol/text_message_model.dart';
+import 'package:single_house/models/dialol/voice_message_model.dart';
 import 'package:single_house/utils/random.dart';
 
 List<DialogModel> get demoChat2 => List.generate(50, (index) {
