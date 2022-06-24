@@ -6,6 +6,7 @@ class AppPassfield extends StatefulWidget {
     Key? key,
     this.isHide = true,
     this.validator,
+    this.textInputAction = TextInputAction.next,
     required this.controller,
     required this.name,
     required this.icon,
@@ -15,6 +16,7 @@ class AppPassfield extends StatefulWidget {
   final String? Function(String?)? validator;
   final String name;
   final String icon;
+  final TextInputAction textInputAction;
 
   @override
   State<AppPassfield> createState() => _AppPassfieldState();
@@ -38,6 +40,7 @@ class _AppPassfieldState extends State<AppPassfield> {
           obscureText: _isHide,
           controller: widget.controller,
           validator: widget.validator,
+          textInputAction: widget.textInputAction,
         ),
         Positioned(
           right: 10,

@@ -66,6 +66,7 @@ class PasswordBottomSheet extends StatelessWidget {
                   name: 'Re-Type new password'.toUpperCase(),
                   icon: 'assets/icons/lock_new.svg',
                   controller: _cofirmPasswordController,
+                  textInputAction: TextInputAction.done,
                   validator:
                       ValidateConfirmPass(isRequired: true, passwordController: _newPasswordController).validation,
                 ),
