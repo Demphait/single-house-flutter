@@ -12,10 +12,12 @@ abstract class SocketIO {
     required String domain,
   }) async {
     _socketIO = IO.io(
-      'https://$domain',
+      domain,
       IO.OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()
+          .setReconnectionDelay(10)
+          .setReconnectionDelayMax(10)
           .enableReconnection()
           .build(),
     );
@@ -30,5 +32,9 @@ abstract class SocketIO {
 
   static void unbind(String event, [void Function(dynamic data)? handler]) {
     _socketIO.off(event, handler);
+  }
+
+  static void send(String event, Map<String, dynamic> data) {
+    _socketIO.emit(event, data);
   }
 }

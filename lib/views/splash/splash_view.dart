@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/components/socket.io/socket.io.dart';
 import 'package:single_house/utils/e_core.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
-import 'package:single_house/widgets/app_loader.dart';
 
 class SplashView extends StatefulWidget {
   static const String name = 'SplashView';
@@ -30,6 +30,19 @@ class _SplashViewState extends State<SplashView> {
       },
     );
     await ApiCore.init('https://signal-house.herokuapp.com/api');
+    await SocketIO.init(
+      domain: 'http://3.71.44.67:5000',
+    );
+
+    SocketIO.bind('message_read', (data) {
+      print('$data');
+    });
+    SocketIO.bind('message_receive', (data) {
+      print('$data');
+    });
+    SocketIO.bind('message_error', (data) {
+      print('$data');
+    });
 
     String accessToken = SpCore.getAccessToken();
     if (accessToken.isEmpty) {
@@ -47,8 +60,12 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLoader(),
+    return const Scaffold(
+      body: Center(
+        child: FlutterLogo(
+          size: 100,
+        ),
+      ),
     );
   }
 }
