@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/app/router/transparent_page_route.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
@@ -11,11 +12,13 @@ import 'package:single_house/utils/theme_provider.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/settings/widgets/avatar_widget.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/mail_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/login_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/password_bottom_sheet.dart';
 import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/login_settings/login_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/email_settings/mail_bottom_sheet.dart';
-import 'package:single_house/views/settings/widgets/password_settings/password_bottom_sheet.dart';
+
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
+import 'package:single_house/views/settings/widgets/settings_bottom_sheet.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
 import 'dart:math' as math;
 
@@ -32,7 +35,8 @@ class SettingsView extends StatefulWidget {
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> with TickerProviderStateMixin {
+class _SettingsViewState extends State<SettingsView>
+    with TickerProviderStateMixin {
   bool _toggleFolders = SpCore.getFolderSetting();
   bool isDarkMode = SpCore.getDarkModeSetting();
   late AnimationController _animationBackgroundIcon;
@@ -40,7 +44,8 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _oldPasswordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _cofirmPasswordController = TextEditingController();
+  final TextEditingController _cofirmPasswordController =
+      TextEditingController();
   final TextEditingController _mailController = TextEditingController();
 
   @override
@@ -73,14 +78,18 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
               child: Column(
                 children: [
                   SizedBox(height: AppSpace.xlg),
-                  const Center(child: AvatarWidget(name: 'Emma Watson', avatar: 'assets/images/avatar.png')),
+                  const Center(
+                      child: AvatarWidget(
+                          name: 'Emma Watson',
+                          avatar: 'assets/images/avatar.png')),
                   const SizedBox(height: 52),
                   ToggleSetting(
                     name: 'Dark Mode',
                     icon: 'assets/icons/dark.svg',
                     switchValue: isDarkMode,
                     function: (bool switchValue) async {
-                      final provider = Provider.of<ThemeProvider>(context, listen: false);
+                      final provider =
+                          Provider.of<ThemeProvider>(context, listen: false);
                       setState(() {
                         isDarkMode = switchValue;
                         provider.toggleTheme(switchValue);
@@ -103,8 +112,14 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/login.svg',
                     info: 'emma_w',
                     func: () {
-                      GlobalContext.modalBottomSheet(
-                        LoginBottomSheet(loginController: _loginController),
+                      Navigator.of(context).push(
+                        TransparentRoute(
+                          builder: (BuildContext context) =>
+                              EditableSettingsWidget(
+                            widget: LoginBottomSheet(
+                                loginController: _loginController),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -113,11 +128,17 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/pass.svg',
                     info: '*********',
                     func: () {
-                      GlobalContext.modalBottomSheet(
-                        PasswordBottomSheet(
-                          oldPasswordController: _oldPasswordController,
-                          newPasswordController: _newPasswordController,
-                          cofirmPasswordController: _cofirmPasswordController,
+                      Navigator.of(context).push(
+                        TransparentRoute(
+                          builder: (BuildContext context) =>
+                              EditableSettingsWidget(
+                            widget: PasswordBottomSheet(
+                              oldPasswordController: _oldPasswordController,
+                              newPasswordController: _newPasswordController,
+                              cofirmPasswordController:
+                                  _cofirmPasswordController,
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -127,8 +148,15 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                     icon: 'assets/icons/email.svg',
                     info: 'example@gmail.com',
                     func: () {
-                      GlobalContext.modalBottomSheet(
-                        EmailBottomSheet(mailController: _mailController),
+                      Navigator.of(context).push(
+                        TransparentRoute(
+                          builder: (BuildContext context) =>
+                              EditableSettingsWidget(
+                            widget: EmailBottomSheet(
+                              mailController: _mailController,
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
