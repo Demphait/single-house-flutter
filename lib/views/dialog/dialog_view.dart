@@ -41,7 +41,8 @@ class _DialogViewState extends State<DialogView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      floatingActionButton: ScrollDownWidget(scrollController: _scrollController),
+      floatingActionButton:
+          ScrollDownWidget(scrollController: _scrollController),
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: DialogAppBar(),
@@ -53,9 +54,11 @@ class _DialogViewState extends State<DialogView> {
               reverse: true,
               controller: _scrollController,
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: AppSpace.sm, vertical: AppSpace.sm),
+              padding: EdgeInsets.symmetric(
+                  horizontal: AppSpace.sm, vertical: AppSpace.sm),
               itemCount: _demoChat.length,
-              itemBuilder: (context, index) => Message(message: _demoChat[index]),
+              itemBuilder: (context, index) =>
+                  Message(message: _demoChat[index]),
             ),
           ),
           const ChatInputField(),

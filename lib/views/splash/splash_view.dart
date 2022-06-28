@@ -29,7 +29,7 @@ class _SplashViewState extends State<SplashView> {
         GlobalContext.showSnackText(message);
       },
     );
-    await ApiCore.init('https://signal-house.herokuapp.com/api');
+    await ApiCore.init('http://3.71.44.67:5000/api');
 
     String accessToken = SpCore.getAccessToken();
     if (accessToken.isEmpty) {
