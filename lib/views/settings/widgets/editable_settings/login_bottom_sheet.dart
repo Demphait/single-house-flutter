@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/utils/validation/validate_login.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/cubit/settings_cubit.dart';
 import 'package:single_house/views/settings/widgets/settings_modal.dart';
 import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/app_textfield.dart';
-
-import 'cubit/settings_login_cubit.dart';
 
 class LoginBottomSheet extends StatelessWidget {
   LoginBottomSheet({
@@ -15,19 +14,19 @@ class LoginBottomSheet extends StatelessWidget {
         super(key: key);
   final TextEditingController _loginController;
 
-  final SettingsLoginCubit _cubit = SettingsLoginCubit();
+  final SettingsCubit _cubit = SettingsCubit();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => _cubit,
       child: Stack(
         children: [
-          BlocBuilder<SettingsLoginCubit, SettingsLoginState>(
+          BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
               switch (state) {
-                case SettingsLoginState.init:
+                case SettingsState.init:
                   return const SizedBox(height: 0);
-                case SettingsLoginState.loading:
+                case SettingsState.loading:
                   return AppLoader();
               }
             },
@@ -35,7 +34,7 @@ class LoginBottomSheet extends StatelessWidget {
           SettingsModal(
             title: 'Login',
             onTap: () async {
-              var result = await _cubit.submit(_loginController.text);
+              var result = await _cubit.submitLogin(_loginController.text);
               if (result) {
                 return true;
               }

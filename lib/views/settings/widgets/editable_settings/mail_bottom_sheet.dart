@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/utils/validation/validate_email.dart';
-import 'package:single_house/views/settings/widgets/email_settings/cubit/email_cubit.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/cubit/settings_cubit.dart';
 import 'package:single_house/views/settings/widgets/settings_modal.dart';
 import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/app_textfield.dart';
@@ -14,7 +14,7 @@ class EmailBottomSheet extends StatelessWidget {
         super(key: key);
 
   final TextEditingController _mailController;
-  final EmailCubit _cubit = EmailCubit();
+  final SettingsCubit _cubit = SettingsCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,12 @@ class EmailBottomSheet extends StatelessWidget {
       create: (context) => _cubit,
       child: Stack(
         children: [
-          BlocBuilder<EmailCubit, EmailState>(
+          BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
               switch (state) {
-                case EmailState.init:
+                case SettingsState.init:
                   return const SizedBox(height: 0);
-                case EmailState.loading:
+                case SettingsState.loading:
                   return AppLoader();
               }
             },
@@ -35,7 +35,7 @@ class EmailBottomSheet extends StatelessWidget {
           SettingsModal(
             title: 'Email',
             onTap: () async {
-              var result = await _cubit.submit(_mailController.text);
+              var result = await _cubit.submitEmail(_mailController.text);
               if (result) {
                 return true;
               }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_house/utils/validation/validate_confirm_pass.dart';
 import 'package:single_house/utils/validation/validate_password.dart';
-import 'package:single_house/views/settings/widgets/password_settings/cubit/settings_password_cubit.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/cubit/settings_cubit.dart';
 import 'package:single_house/views/settings/widgets/settings_modal.dart';
 import 'package:single_house/widgets/app_loader.dart';
 import 'package:single_house/widgets/app_passfield.dart';
@@ -21,7 +21,7 @@ class PasswordBottomSheet extends StatelessWidget {
   final TextEditingController _oldPasswordController;
   final TextEditingController _newPasswordController;
   final TextEditingController _cofirmPasswordController;
-  final SettingsPasswordCubit _cubit = SettingsPasswordCubit();
+  final SettingsCubit _cubit = SettingsCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class PasswordBottomSheet extends StatelessWidget {
       create: (context) => _cubit,
       child: Stack(
         children: [
-          BlocBuilder<SettingsPasswordCubit, SettingsPasswordState>(
+          BlocBuilder<SettingsCubit, SettingsState>(
             builder: (context, state) {
               switch (state) {
-                case SettingsPasswordState.init:
+                case SettingsState.init:
                   return const SizedBox(height: 0);
-                case SettingsPasswordState.loading:
+                case SettingsState.loading:
                   return AppLoader();
               }
             },
@@ -42,7 +42,8 @@ class PasswordBottomSheet extends StatelessWidget {
           SettingsModal(
             title: 'Password',
             onTap: () async {
-              var result = await _cubit.submit(_oldPasswordController.text, _newPasswordController.text);
+              var result = await _cubit.submitPassword(
+                  _oldPasswordController.text, _newPasswordController.text);
               if (result) {
                 return true;
               }
@@ -67,8 +68,10 @@ class PasswordBottomSheet extends StatelessWidget {
                   icon: 'assets/icons/lock_new.svg',
                   controller: _cofirmPasswordController,
                   textInputAction: TextInputAction.done,
-                  validator:
-                      ValidateConfirmPass(isRequired: true, passwordController: _newPasswordController).validation,
+                  validator: ValidateConfirmPass(
+                          isRequired: true,
+                          passwordController: _newPasswordController)
+                      .validation,
                 ),
               ],
             ),
