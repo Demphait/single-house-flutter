@@ -53,7 +53,8 @@ class _LoginWidgetState extends State<LoginWidget> {
               ElevatedButton(
                 onPressed: () {
                   if (widget.formKey.currentState?.validate() == true) {
-                    _cubit.submit(widget.loginController.text, widget.passController.text);
+                    _cubit.submit(widget.loginController.text,
+                        widget.passController.text);
                     _cubit.loading();
                     RouterCore.push(ChatsView.name);
                   }
