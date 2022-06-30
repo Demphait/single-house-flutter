@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/app/router/transparent_page_route.dart';
 
 abstract class RouterCore {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static PageRoute createRoute(Widget view) => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => view,
+      );
+
+  static PageRoute createTransparentRoute(Widget view) => TransparentRoute(
+        builder: (BuildContext context) => view,
       );
 
   static Future<dynamic> push(

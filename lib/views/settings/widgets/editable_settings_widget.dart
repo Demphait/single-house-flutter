@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:single_house/app/router/router_core.dart';
+
+class EditableSettingsArgs {
+  final Widget widget;
+
+  EditableSettingsArgs(this.widget);
+}
 
 class EditableSettingsWidget extends StatelessWidget {
   const EditableSettingsWidget({
     Key? key,
-    required this.widget,
+    required this.args,
   }) : super(key: key);
-  final Widget widget;
+
+  final EditableSettingsArgs args;
+
+  static const String name = 'EditableSettingsWidget';
+  static PageRoute route(EditableSettingsArgs args) =>
+      RouterCore.createTransparentRoute(
+        EditableSettingsWidget(args: args),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +53,7 @@ class EditableSettingsWidget extends StatelessWidget {
                   ),
                   color: Theme.of(context).backgroundColor,
                 ),
-                child: widget,
+                child: args.widget,
               ),
             ),
           ),
