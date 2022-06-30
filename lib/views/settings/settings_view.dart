@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
-import 'package:single_house/app/router/transparent_page_route.dart';
+import 'package:single_house/network/user_network.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
@@ -18,7 +18,7 @@ import 'package:single_house/views/settings/widgets/editable_settings/password_b
 import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
 
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
-import 'package:single_house/views/settings/widgets/settings_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/editable_settings_widget.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
 import 'dart:math' as math;
 
@@ -112,13 +112,10 @@ class _SettingsViewState extends State<SettingsView>
                     icon: 'assets/icons/login.svg',
                     info: 'emma_w',
                     func: () {
-                      Navigator.of(context).push(
-                        TransparentRoute(
-                          builder: (BuildContext context) =>
-                              EditableSettingsWidget(
-                            widget: LoginBottomSheet(
-                                loginController: _loginController),
-                          ),
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          LoginBottomSheet(loginController: _loginController),
                         ),
                       );
                     },
@@ -128,16 +125,13 @@ class _SettingsViewState extends State<SettingsView>
                     icon: 'assets/icons/pass.svg',
                     info: '*********',
                     func: () {
-                      Navigator.of(context).push(
-                        TransparentRoute(
-                          builder: (BuildContext context) =>
-                              EditableSettingsWidget(
-                            widget: PasswordBottomSheet(
-                              oldPasswordController: _oldPasswordController,
-                              newPasswordController: _newPasswordController,
-                              cofirmPasswordController:
-                                  _cofirmPasswordController,
-                            ),
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          PasswordBottomSheet(
+                            oldPasswordController: _oldPasswordController,
+                            newPasswordController: _newPasswordController,
+                            cofirmPasswordController: _cofirmPasswordController,
                           ),
                         ),
                       );
@@ -148,14 +142,10 @@ class _SettingsViewState extends State<SettingsView>
                     icon: 'assets/icons/email.svg',
                     info: 'example@gmail.com',
                     func: () {
-                      Navigator.of(context).push(
-                        TransparentRoute(
-                          builder: (BuildContext context) =>
-                              EditableSettingsWidget(
-                            widget: EmailBottomSheet(
-                              mailController: _mailController,
-                            ),
-                          ),
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          EmailBottomSheet(mailController: _mailController),
                         ),
                       );
                     },
@@ -165,8 +155,11 @@ class _SettingsViewState extends State<SettingsView>
                     icon: 'assets/icons/language.svg',
                     info: 'English',
                     func: () {
-                      GlobalContext.modalBottomSheet(
-                        const LanguageBottomSheet(),
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          const LanguageBottomSheet(),
+                        ),
                       );
                     },
                   ),
@@ -175,6 +168,7 @@ class _SettingsViewState extends State<SettingsView>
                     icon: 'assets/icons/logout.svg',
                     info: '',
                     func: () {
+                      UserNetwork.logout();
                       ApiCore.setTokens(null, null);
                       RouterCore.push(AuthView.name);
                     },
