@@ -51,19 +51,19 @@ class PasswordBottomSheet extends StatelessWidget {
             },
             child: Column(
               children: [
-                AppPassfield(
+                AppPassField(
                   name: 'Type old password'.toUpperCase(),
                   icon: 'assets/icons/lock_new.svg',
                   controller: _oldPasswordController,
                   validator: ValidatePassword(isRequired: true).validation,
                 ),
-                AppPassfield(
+                AppPassField(
                   name: 'Type new password'.toUpperCase(),
                   icon: 'assets/icons/lock_new.svg',
                   controller: _newPasswordController,
                   validator: ValidatePassword(isRequired: true).validation,
                 ),
-                AppPassfield(
+                AppPassField(
                   name: 'Re-Type new password'.toUpperCase(),
                   icon: 'assets/icons/lock_new.svg',
                   controller: _cofirmPasswordController,

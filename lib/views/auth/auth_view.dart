@@ -3,6 +3,7 @@ import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/validation/validate_login.dart';
 import 'package:single_house/utils/validation/validate_password.dart';
+import 'package:single_house/widgets/app_passfield.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'components/login/login_component.dart';
@@ -66,31 +67,13 @@ class _AuthViewState extends State<AuthView> {
                           validator: ValidateLogin(isRequired: true).validation,
                         ),
                         // AppSpaceBox.md,
-                        Stack(
-                          children: [
-                            AppTextField(
-                              name: 'Password',
-                              icon: 'assets/icons/lock_new.svg',
-                              obscureText: isHidePassword,
-                              textInputAction: TextInputAction.done,
-                              controller: _passwordController,
-                              validator: ValidatePassword(isRequired: true).validation,
-                            ),
-                            Positioned(
-                              right: 10,
-                              top: 33,
-                              child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isHidePassword = !isHidePassword;
-                                  });
-                                },
-                                icon: isHidePassword
-                                    ? Icon(Icons.remove_red_eye_outlined, color: Theme.of(context).iconTheme.color)
-                                    : Icon(Icons.visibility_off_outlined, color: Theme.of(context).iconTheme.color),
-                              ),
-                            ),
-                          ],
+                        AppPassField(
+                          name: 'Password',
+                          icon: 'assets/icons/lock_new.svg',
+                          textInputAction: TextInputAction.done,
+                          controller: _passwordController,
+                          validator:
+                              ValidatePassword(isRequired: true).validation,
                         ),
                       ],
                     ),

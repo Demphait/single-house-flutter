@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
-import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/network/user_network.dart';
 import 'package:single_house/styles/app_colors.dart';

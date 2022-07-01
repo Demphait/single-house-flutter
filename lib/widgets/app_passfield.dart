@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 
-class AppPassfield extends StatefulWidget {
-  const AppPassfield({
+class AppPassField extends StatefulWidget {
+  const AppPassField({
     Key? key,
     this.isHide = true,
     this.validator,
@@ -19,10 +19,10 @@ class AppPassfield extends StatefulWidget {
   final TextInputAction textInputAction;
 
   @override
-  State<AppPassfield> createState() => _AppPassfieldState();
+  State<AppPassField> createState() => _AppPassFieldState();
 }
 
-class _AppPassfieldState extends State<AppPassfield> {
+class _AppPassFieldState extends State<AppPassField> {
   bool _isHide = true;
   @override
   void initState() {
@@ -46,14 +46,18 @@ class _AppPassfieldState extends State<AppPassfield> {
           right: 10,
           top: 30,
           child: IconButton(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
             onPressed: () {
               setState(() {
                 _isHide = !_isHide;
               });
             },
             icon: _isHide
-                ? Icon(Icons.remove_red_eye_outlined, color: Theme.of(context).iconTheme.color)
-                : Icon(Icons.visibility_off_outlined, color: Theme.of(context).iconTheme.color),
+                ? Icon(Icons.remove_red_eye_outlined,
+                    color: Theme.of(context).iconTheme.color)
+                : Icon(Icons.visibility_off_outlined,
+                    color: Theme.of(context).iconTheme.color),
           ),
         ),
       ],
