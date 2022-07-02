@@ -30,7 +30,7 @@ class _SplashViewState extends State<SplashView> {
         GlobalContext.showSnackText(message);
       },
     );
-    await ApiCore.init('http://3.71.44.67:5000/api');
+    await ApiCore.init('http://52.29.56.121:5000/api');
 
     String accessToken = SpCore.getAccessToken();
     if (accessToken.isEmpty) {
