@@ -1,4 +1,4 @@
-import 'package:single_house/models/dialog_model.dart';
+import 'package:single_house/models/dialol/dialog_model.dart';
 
 class TextMessageModel extends DialogModel {
   final String text;

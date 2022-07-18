@@ -17,8 +17,10 @@ class AppThemes {
   static ThemeData get darkTheme => ThemeData(
         scaffoldBackgroundColor: AppColors.background,
         backgroundColor: AppColors.mediumGrey,
-        selectedRowColor: AppColors.dividingLine, //AppColors.dividingLine
-        primaryColorLight: AppColors.darkGrey, //AppColors.darkGrey
+        selectedRowColor: AppColors.dividingLine,
+        primaryColorLight: AppColors.darkGrey,
+        canvasColor: AppColors.lightBlack,
+        shadowColor: AppColors.lightBlack,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.grey,
@@ -26,7 +28,9 @@ class AppThemes {
           headlineLarge: AppTextStyles.smallTextStyle.white,
           labelMedium: AppTextStyles.largeTextStyle.grey,
           headlineMedium: AppTextStyles.primaryTextStyle.white,
+          labelLarge: AppTextStyles.mediumTextStyle.grey,
           titleMedium: AppTextStyles.title.white,
+          titleSmall: AppTextStyles.secondTitle.white,
         ),
         primaryColor: AppColors.grey,
         colorScheme: const ColorScheme.dark(onPrimary: Colors.white),
@@ -41,6 +45,8 @@ class AppThemes {
         backgroundColor: AppColors.dividerColorLight,
         selectedRowColor: AppColors.white,
         primaryColorLight: AppColors.secondGrey,
+        canvasColor: AppColors.white,
+        shadowColor: AppColors.grey,
         textTheme: TextTheme(
           bodyLarge: AppTextStyles.smallTextStyle.grey,
           titleLarge: AppTextStyles.largeTextStyle.mediumGrey,
@@ -48,7 +54,9 @@ class AppThemes {
           headlineLarge: AppTextStyles.smallTextStyle.grey,
           labelMedium: AppTextStyles.largeTextStyle.grey,
           headlineMedium: AppTextStyles.primaryTextStyle.mediumGrey,
+          labelLarge: AppTextStyles.mediumTextStyle.grey,
           titleMedium: AppTextStyles.title.mediumGrey,
+          titleSmall: AppTextStyles.secondTitle.mediumGrey,
         ),
         primaryColor: AppColors.lightGrey,
         colorScheme: const ColorScheme.light(),

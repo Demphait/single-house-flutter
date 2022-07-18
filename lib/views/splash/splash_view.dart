@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/global_context.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/network/user_network.dart';
 import 'package:single_house/utils/e_core.dart';
 import 'package:single_house/utils/sp_core.dart';
 import 'package:single_house/views/auth/auth_view.dart';
@@ -29,13 +30,18 @@ class _SplashViewState extends State<SplashView> {
         GlobalContext.showSnackText(message);
       },
     );
-    await ApiCore.init('https://signal-house.herokuapp.com/api');
+    await ApiCore.init('http://52.29.56.121:5000/api');
 
     String accessToken = SpCore.getAccessToken();
     if (accessToken.isEmpty) {
       return RouterCore.push(AuthView.name);
     }
     ApiCore.setTokens(accessToken, null);
+    bool resultUserCheck = await UserNetwork.userCheck();
+    if (resultUserCheck == false) {
+      ApiCore.setTokens(null, null);
+      RouterCore.push(AuthView.name);
+    }
     RouterCore.push(ChatsView.name);
   }
 

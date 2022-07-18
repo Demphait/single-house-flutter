@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_house/api/api_core.dart';
 import 'package:single_house/app/router/router_core.dart';
+import 'package:single_house/network/user_network.dart';
 import 'package:single_house/styles/app_colors.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/styles/app_text_styles.dart';
@@ -10,7 +11,13 @@ import 'package:single_house/utils/theme_provider.dart';
 import 'package:single_house/views/auth/auth_view.dart';
 import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/settings/widgets/avatar_widget.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/mail_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/login_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/editable_settings/password_bottom_sheet.dart';
+import 'package:single_house/views/settings/widgets/language_bottom_sheet.dart';
+
 import 'package:single_house/views/settings/widgets/setting_widget.dart';
+import 'package:single_house/views/settings/widgets/editable_settings_widget.dart';
 import 'package:single_house/views/settings/widgets/switch_setting.dart';
 import 'dart:math' as math;
 
@@ -27,11 +34,18 @@ class SettingsView extends StatefulWidget {
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> with TickerProviderStateMixin {
+class _SettingsViewState extends State<SettingsView>
+    with TickerProviderStateMixin {
   bool _toggleFolders = SpCore.getFolderSetting();
   bool isDarkMode = SpCore.getDarkModeSetting();
   late AnimationController _animationBackgroundIcon;
   late AnimationController _animationMenu;
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _oldPasswordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _cofirmPasswordController =
+      TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
 
   @override
   void initState() {
@@ -63,14 +77,18 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
               child: Column(
                 children: [
                   SizedBox(height: AppSpace.xlg),
-                  const Center(child: AvatarWidget(name: 'Emma Watson', avatar: 'assets/images/avatar.png')),
+                  const Center(
+                      child: AvatarWidget(
+                          name: 'Emma Watson',
+                          avatar: 'assets/images/avatar.png')),
                   const SizedBox(height: 52),
                   ToggleSetting(
                     name: 'Dark Mode',
                     icon: 'assets/icons/dark.svg',
                     switchValue: isDarkMode,
                     function: (bool switchValue) async {
-                      final provider = Provider.of<ThemeProvider>(context, listen: false);
+                      final provider =
+                          Provider.of<ThemeProvider>(context, listen: false);
                       setState(() {
                         isDarkMode = switchValue;
                         provider.toggleTheme(switchValue);
@@ -91,32 +109,65 @@ class _SettingsViewState extends State<SettingsView> with TickerProviderStateMix
                   SettingWidget(
                     name: 'Login',
                     icon: 'assets/icons/login.svg',
-                    info: 'm.me/Ricardo_M',
-                    func: () {},
+                    info: 'emma_w',
+                    func: () {
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          LoginBottomSheet(loginController: _loginController),
+                        ),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Password',
                     icon: 'assets/icons/pass.svg',
                     info: '*********',
-                    func: () {},
+                    func: () {
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          PasswordBottomSheet(
+                            oldPasswordController: _oldPasswordController,
+                            newPasswordController: _newPasswordController,
+                            cofirmPasswordController: _cofirmPasswordController,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Email',
                     icon: 'assets/icons/email.svg',
                     info: 'example@gmail.com',
-                    func: () {},
+                    func: () {
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          EmailBottomSheet(mailController: _mailController),
+                        ),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Language',
                     icon: 'assets/icons/language.svg',
                     info: 'English',
-                    func: () {},
+                    func: () {
+                      RouterCore.push(
+                        EditableSettingsWidget.name,
+                        argument: EditableSettingsArgs(
+                          const LanguageBottomSheet(),
+                        ),
+                      );
+                    },
                   ),
                   SettingWidget(
                     name: 'Logout',
                     icon: 'assets/icons/logout.svg',
                     info: '',
                     func: () {
+                      UserNetwork.logout();
                       ApiCore.setTokens(null, null);
                       RouterCore.push(AuthView.name);
                     },

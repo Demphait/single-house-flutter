@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/models/dialog_model.dart';
-import 'package:single_house/models/file_message_model.dart';
-import 'package:single_house/models/image_message_model.dart';
-import 'package:single_house/models/text_message_model.dart';
-import 'package:single_house/models/voice_message_model.dart';
+import 'package:single_house/models/dialol/dialog_model.dart';
+import 'package:single_house/models/dialol/file_message_model.dart';
+import 'package:single_house/models/dialol/image_message_model.dart';
+import 'package:single_house/models/dialol/text_message_model.dart';
+import 'package:single_house/models/dialol/voice_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/views/dialog/widgets/audio_message.dart';
 import 'package:single_house/views/dialog/widgets/file_message.dart';
@@ -64,7 +64,9 @@ class Message extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: AppSpace.sm),
                     child: Text(
                       '00:05',
-                      style: message.isSender ? Theme.of(context).textTheme.headlineLarge : Theme.of(context).textTheme.headlineLarge,
+                      style: message.isSender
+                          ? Theme.of(context).textTheme.headlineLarge
+                          : Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
                 TimeStatusWidget(time: message.time, status: message.messageStatus),

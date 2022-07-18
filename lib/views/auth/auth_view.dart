@@ -3,6 +3,7 @@ import 'package:single_house/app/router/router_core.dart';
 import 'package:single_house/styles/app_space.dart';
 import 'package:single_house/utils/validation/validate_login.dart';
 import 'package:single_house/utils/validation/validate_password.dart';
+import 'package:single_house/widgets/app_passfield.dart';
 import 'package:single_house/widgets/app_textfield.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'components/login/login_component.dart';
@@ -61,34 +62,18 @@ class _AuthViewState extends State<AuthView> {
                       children: [
                         AppTextField(
                           name: 'Username',
+                          icon: 'assets/icons/user_new.svg',
                           controller: _loginController,
                           validator: ValidateLogin(isRequired: true).validation,
                         ),
-                        AppSpaceBox.md,
-                        Stack(
-                          children: [
-                            AppTextField(
-                              name: 'Password',
-                              obscureText: isHidePassword,
-                              textInputAction: TextInputAction.done,
-                              controller: _passwordController,
-                              validator: ValidatePassword(isRequired: true).validation,
-                            ),
-                            Positioned(
-                              right: 10,
-                              top: 8,
-                              child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isHidePassword = !isHidePassword;
-                                  });
-                                },
-                                icon: isHidePassword
-                                    ? const Icon(Icons.remove_red_eye_outlined)
-                                    : const Icon(Icons.visibility_off_outlined),
-                              ),
-                            ),
-                          ],
+                        // AppSpaceBox.md,
+                        AppPassField(
+                          name: 'Password',
+                          icon: 'assets/icons/lock_new.svg',
+                          textInputAction: TextInputAction.done,
+                          controller: _passwordController,
+                          validator:
+                              ValidatePassword(isRequired: true).validation,
                         ),
                       ],
                     ),
@@ -100,7 +85,7 @@ class _AuthViewState extends State<AuthView> {
           Container(
             child: SmoothPageIndicator(controller: _pageController, count: 2),
             padding: EdgeInsets.symmetric(vertical: AppSpace.sm),
-            margin: const EdgeInsets.only(bottom: 78),
+            margin: const EdgeInsets.only(bottom: 50),
           ),
         ],
       ),

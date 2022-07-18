@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:single_house/models/file_message_model.dart';
+import 'package:single_house/models/dialol/file_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
 
 import 'package:single_house/views/dialog/widgets/size_file_widget.dart';

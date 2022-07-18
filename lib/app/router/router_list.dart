@@ -4,8 +4,8 @@ import 'package:single_house/views/chats/chats_view.dart';
 import 'package:single_house/views/dialog/dialog_view.dart';
 import 'package:single_house/views/example/example_view.dart';
 import 'package:single_house/views/settings/settings_view.dart';
+import 'package:single_house/views/settings/widgets/editable_settings_widget.dart';
 import 'package:single_house/views/splash/splash_view.dart';
-
 
 abstract class RouterList {
   static String get defaultRoute => SplashView.name;
@@ -18,11 +18,17 @@ abstract class RouterList {
   }
 
   static Map<String, PageRoute Function(Object?)?> get _list => {
-        ExampleView.name: (arg) => ExampleView.route(), 
+        ExampleView.name: (arg) => ExampleView.route(),
         AuthView.name: (arg) => AuthView.route(),
         ChatsView.name: (arg) => ChatsView.route(),
         DialogView.name: (arg) => DialogView.route(),
         SettingsView.name: (arg) => SettingsView.route(),
         SplashView.name: (arg) => SplashView.route(),
+        EditableSettingsWidget.name: (arg) {
+          if (arg is EditableSettingsArgs) {
+            return EditableSettingsWidget.route(arg);
+          }
+          return ExampleView.route();
+        },
       };
 }

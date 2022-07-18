@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:single_house/models/voice_message_model.dart';
+import 'package:single_house/models/dialol/voice_message_model.dart';
 import 'package:single_house/styles/app_space.dart';
 
 class AudioMessage extends StatelessWidget {
